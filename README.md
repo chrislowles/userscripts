@@ -15,5 +15,5 @@ Same as regular Unbuzzwordify but just for the word woke, like a taster for the 
 Zeros out most youtube.com timestamps upon loading, might be helpful for certain situations.
 
 ## Ones I use:
-#### [twitterblue-nerd.js](https://gist.githubusercontent.com/busybox11/53c76f57a577a47a19fab649a76f18e3/raw/twitterblue-nerd.js "Right click, copy the url here and import via URL to install properly.")
+### [twitterblue-nerd.js](https://gist.githubusercontent.com/busybox11/53c76f57a577a47a19fab649a76f18e3/raw/twitterblue-nerd.js "Right click, copy the url here and import via URL to install properly.")
 Replaces the Twitter checkmark (which is now a paid feature) with a nerd emoji merged with the outline of a checkmark.
