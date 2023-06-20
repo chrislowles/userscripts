@@ -4,6 +4,7 @@
 // @version      1.5.1
 // @description  Replaces specifically the word woke with other, more entertaining words.
 // @source       https://github.com/chrishazfun
+// @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
 // @downloadURL  https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
 // @author       chrishazfun
 // @icon         https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.png
