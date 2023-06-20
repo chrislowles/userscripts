@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbuzzwordify
 // @namespace    https://github.com/chrishazfun
-// @version      1.5.1
+// @version      1.5.2
 // @description  Replaces buzzwords with other, more entertaining words.
 // @source       https://github.com/chrishazfun
 // @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js
