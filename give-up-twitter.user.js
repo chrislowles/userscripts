@@ -11,4 +11,4 @@
 // @include      *://*twitter.com*/*
 // ==/UserScript==
 
-window.location.href = "https://youtu.be/embed/dQw4w9WgXcQ?autoplay=true";
+window.location.href = "https://youtu.be/dQw4w9WgXcQ";
