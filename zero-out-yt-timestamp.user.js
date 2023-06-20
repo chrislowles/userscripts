@@ -1,13 +1,12 @@
 // ==UserScript==
 // @name         Zero Out YT Timestamp
 // @namespace    https://github.com/chrishazfun
-// @version      1.2.1
+// @version      1.2.2
 // @description  Zeros out any youtube.com timestamp upon loading, might be helpful for certain situations.
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @source       https://github.com/chrishazfun
-// @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/zero-out-yt-timestamp.user.js
 // @downloadURL  https://raw.githubusercontent.com/chrishazfun/userscripts/main/zero-out-yt-timestamp.user.js
 // @author       chrishazfun
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @match        *youtube.com*
 // @include      *youtube.com*
 // @require      https://cdn.jsdelivr.net/npm/jquery@3.2
