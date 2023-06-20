@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbuzzwordify (Just Woke)
 // @namespace    https://github.com/chrishazfun
-// @version      1.3.0
+// @version      1.5.0
 // @description  Replaces specifically the word woke with other, more entertaining words.
 // @source       https://github.com/chrishazfun
 // @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
@@ -9,9 +9,9 @@
 // @author       chrishazfun
 // @icon         https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.png
 // -- sites that break with this
-// @exclude-match https://onlyfans.com/*
-// @exclude-match https://*pcpartpicker*/*
-// @exclude-match https://webapp.licenceready.com.au/*
+// @exclude-match *://onlyfans.com/*
+// @exclude-match *://*pcpartpicker*/*
+// @exclude-match *://webapp.licenceready.com.au/*
 // @exclude-match *://*.deviantart.com/*
 // @exclude-match *://*.bandcamp.com/*
 // ==/UserScript==
