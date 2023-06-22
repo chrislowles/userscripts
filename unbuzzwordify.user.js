@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbuzzwordify
 // @namespace    https://github.com/chrishazfun
-// @version      1.5.3
+// @version      1.5.4
 // @description  Replaces buzzwords with other, more entertaining words.
 // @source       https://github.com/chrishazfun
 // @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js
@@ -17,7 +17,7 @@
 // ==/UserScript==
 
 function unbuzzwordify() {
-	var elements = document.querySelectorAll('*:not(textarea)');
+	var elements = document.querySelectorAll('*:not(textarea,input,.r-1h8ys4a.r-kemksi.css-1dbjc4n > div.css-1dbjc4n:nth-of-type(1) > .css-1dbjc4n > .r-ymttw5.css-1dbjc4n *)');
 	var phrases = [
 		"WAH",
 		"GOATSE",
