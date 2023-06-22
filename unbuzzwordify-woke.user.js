@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbuzzwordify (Just Woke)
 // @namespace    https://github.com/chrishazfun
-// @version      1.5.2
+// @version      1.5.3
 // @description  Replaces specifically the word woke with other, more entertaining words.
 // @source       https://github.com/chrishazfun
 // @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
@@ -17,7 +17,7 @@
 // ==/UserScript==
 
 function unbuzzwordify() {
-	var elements = document.querySelectorAll('*');
+	var elements = document.querySelectorAll('*:not(textarea)');
 	var phrases = [
 		"WAH",
 		"GOATSE",
