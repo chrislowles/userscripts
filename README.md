@@ -19,3 +19,5 @@ Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements 
 ## Ones I use:
 ### [twitterblue-nerd.js](https://gist.githubusercontent.com/busybox11/53c76f57a577a47a19fab649a76f18e3/raw/twitterblue-nerd.js "Right click, copy the url here and import via URL to install properly.")
 Replaces the Twitter checkmark (which is now a paid feature) with a nerd emoji merged with the outline of a checkmark.
+### [Kbin Utility Pack](https://greasyfork.org/en/scripts/469597-kbin-usability-pack "The script has a homepage on Greasyfork.org")
+"A collection of very opinionated usability enhancements for Kbin."
