@@ -14,6 +14,8 @@
 // @exclude-match *://webapp.licenceready.com.au/*
 // @exclude-match *://*.deviantart.com/*
 // @exclude-match *://*.bandcamp.com/*
+// @exclude-match *://*codetasty.com/*
+// @exclude-match *://*vscode.dev/*
 // ==/UserScript==
 
 function unbuzzwordify() {
