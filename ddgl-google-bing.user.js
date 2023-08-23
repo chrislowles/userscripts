@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name DDG Lite > Google or Bing
 // @namespace https://github.com/chrishazfun
-// @version 1.0.5
+// @version 1.0.6
 // @description Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google-bing.user.js
@@ -12,22 +12,17 @@
 // @match https://lite.duckduckgo.com/lite/
 // ==/UserScript==
 
-let spacer = document.createElement('span');
-spacer.href = "width:5px";
-
 let google = document.createElement('a');
 google.href = `https://www.google.com/search?q=${document.querySelector("input.query").value}`;
 google.target = "_top";
 google.innerHTML = "Google";
-// document.querySelector(".filters table tbody tr td:nth-of-type(2)").appendChild(google);
+google.style.margin = "0 0 0 5px";
 
 let bing = document.createElement('a');
 bing.href = `https://www.bing.com/search?q=${document.querySelector("input.query").value}`;
 bing.target = "_top";
 bing.innerHTML = "Bing";
-// document.querySelector(".filters table tbody tr td:nth-of-type(2)").appendChild(bing);
+bing.style.margin = "0 0 0 5px";
 
-document.querySelector(".filters select[name='df']").after(spacer)
 document.querySelector(".filters select[name='df']").after(google)
-document.querySelector(".filters select[name='df']").after(spacer)
 document.querySelector(".filters select[name='df']").after(bing)
