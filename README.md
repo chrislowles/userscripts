@@ -6,7 +6,9 @@ Userscripts are extensions written to be installed in userscript managers, the b
 
 ## Ones I've made:
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js)
-Redirects any twitter.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
+Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
+### [ddgl-google.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google.user.js)
+Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
 ### [unbuzzwordify.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js)
 Replaces certain buzzwords with other, more entertaining words.
 ### [unbuzzwordify-woke.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js)
