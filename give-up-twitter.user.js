@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Give Up Twitter/X
 // @namespace    https://github.com/chrishazfun
-// @version      1.5.6
+// @version      1.5.7
 // @description  Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit.
 // @source       https://github.com/chrishazfun
 // @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
