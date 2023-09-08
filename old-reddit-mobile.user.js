@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         old reddit mobile
+// @name         Old Reddit Mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.0.2
-// @description  Improves reddit by redirecting to old.reddit.com and adjusting some styles to fit the form better.
-// @author       chrishazfun (chrishaz.fun) / kain (ksir.pw)
+// @version      1.0.3
+// @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
+// @author       chrishazfun (chrishaz.fun)
 // @match        *://*.reddit.com/*
 // @exclude      *://www.reddit.com/poll/*
 // @icon         https://www.google.com/s2/favicons?domain=www.reddit.com
@@ -12,39 +12,37 @@
 // ==/UserScript==
 
 if (window.location.host == "old.reddit.com") {
-	// viewport is non-standard
-	document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
-	// restyle for mobile
-	let styles = `
-	body {
-		display: flex;
-		flex-direction: column;
-	}
-	.side {
-		float: unset;
-		background-color: unset;
-		margin: 0px 5px 0 5px;
-		width: unset;
-	}
-	#header { order: 1; }
-	.side { order: 3; }
-	.content { order: 2; }
-	.footer-parent { order: 4; }
-	.debuginfo { order: 5; }
-	`
-	let stylesEl = document.createElement("style");
-	stylesEl.innerHTML = styles;
-	document.querySelector("head").prepend(stylesEl);
+    // viewport is non-standard
+    document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
+    // restyle for mobile
+    let styles = `
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    .side {
+        float: unset;
+        background-color: unset;
+        margin: 0px 5px 0 5px;
+        width: unset;
+    }
+    #header { order: 1; }
+    .side { order: 3; }
+    .content { order: 2; }
+    .footer-parent { order: 4; }
+    .debuginfo { order: 5; }
+    `
+    let stylesEl = document.createElement("style");
+    stylesEl.innerHTML = styles;
+    document.querySelector("head").prepend(stylesEl);
 }
-
-// kain.pw "old reddit please!"
 
 // Used for optimization when there's too many links on a page
 const use_optimization = true;
 // Number of links on the page before using optimization
 const opti_threshold = 250;
 const opti_dataname = 'orp40897';
-// Time between each cleanup (in milliseconds)
+// Time between each cleanup (in ms)
 const clean_interval = 1000;
 
 const log = (msg) => console.log(`[old-reddit-please] ${msg}`);
@@ -71,7 +69,7 @@ function updateLink(url) {
     }
 }
 
-// Main fuction
+// Main Function
 (() => {
     let ready = true;
     let last_count = 0;
@@ -117,6 +115,6 @@ function updateLink(url) {
     update_links();
 })();
 
-if (test(window.location.href)){
+if (test(window.location.href)) {
   window.location.assign(updateLink(window.location.href));
 }
