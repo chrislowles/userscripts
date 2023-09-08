@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Old Reddit Mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.0.7
+// @version      1.0.8
 // @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
 // @author       chrishazfun (chrishaz.fun)
 // @match        *://*.reddit.com/*
@@ -24,8 +24,7 @@ if (window.location.host == "old.reddit.com") {
         .side {
             float: unset;
             background-color: unset;
-            margin: 0px 5px 0 5px;
-            width: unset;
+            width: unset !important;
         }
         #header { order: 1; }
         .side { order: 3; }
