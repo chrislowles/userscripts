@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Old Reddit Mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.1.1
+// @version      1.1.2
 // @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
 // @author       chrishazfun (chrishaz.fun)
 // @match        *://*.reddit.com/*
@@ -18,6 +18,11 @@ if (window.location.host == "old.reddit.com") {
     setTimeout(() => {
         // viewport is non-standard
         document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
+        // scaling for zoom glitch, force it
+        let scale = 'scale(1)';
+        document.body.style.webkitTransform = scale;
+        document.body.style.msTransform = scale;
+        document.body.style.transform = scale;  
         // restyle for mobile
         let styles = `
         body {
