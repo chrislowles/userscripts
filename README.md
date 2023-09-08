@@ -6,7 +6,7 @@ Userscripts are extensions written to be installed in userscript managers, the b
 
 ## Ones I've made:
 ### [old-reddit-mobile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-mobile.user.js)
-Optimizes old.reddit for mobile, redirects reddit to it also.
+Optimizes old.reddit for mobile, redirects standard Reddit to it also.
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js)
 Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google-bing.user.js)
