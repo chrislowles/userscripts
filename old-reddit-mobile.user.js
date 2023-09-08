@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Old Reddit Mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.1.0
+// @version      1.1.1
 // @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
 // @author       chrishazfun (chrishaz.fun)
 // @match        *://*.reddit.com/*
@@ -12,6 +12,9 @@
 // ==/UserScript==
 
 if (window.location.host == "old.reddit.com") {
+    if (document.querySelectorAll("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").length > 0) {
+        document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
+    }
     setTimeout(() => {
         // viewport is non-standard
         document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
@@ -40,7 +43,7 @@ if (window.location.host == "old.reddit.com") {
         let stylesEl = document.createElement("style");
         stylesEl.innerHTML = styles;
         document.querySelector("head").prepend(stylesEl);
-    }, 100);
+    }, 5);
 }
 
 // Used for optimization when there's too many links on a page
