@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         old reddit mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.0
+// @version      1.0.2
 // @description  Improves reddit by redirecting to old.reddit.com and adjusting some styles to fit the form better.
 // @author       chrishazfun (chrishaz.fun) / kain (ksir.pw)
 // @match        *://*.reddit.com/*
