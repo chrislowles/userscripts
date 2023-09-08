@@ -12,6 +12,10 @@
 // ==/UserScript==
 
 // chf section {
+setTimeout(function() {
+	// viewport is non-standard
+	document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
+}, 500);
 let styles = `
 body {
 	display: flex;
