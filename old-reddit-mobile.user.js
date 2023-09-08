@@ -22,8 +22,7 @@ if (window.location.host == "old.reddit.com") {
             flex-direction: column;
         }
         .side {
-            float: unset;
-            background-color: unset;
+            float: unset !important;
             width: unset !important;
         }
         #header { order: 1; }
