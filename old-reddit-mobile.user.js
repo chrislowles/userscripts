@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Old Reddit Mobile
 // @namespace    http://chrishaz.fun/
-// @version      1.1.9
+// @version      1.2.0
 // @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
 // @author       chrishazfun (chrishaz.fun)
 // @match        *://*.reddit.com/*
@@ -19,10 +19,16 @@ if (window.location.host == "old.reddit.com") {
         // viewport is non-standard
         document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
         // scaling for zoom glitch, force it
-        let scale = 'scale(1)';
-        document.body.style.webkitTransform = scale;
-        document.body.style.msTransform = scale;
-        document.body.style.transform = scale;  
+        let viewportmeta = document.querySelector('meta[name="viewport"]');
+        if (viewportmeta === null) {
+        viewportmeta = document.createElement("meta");
+        viewportmeta.setAttribute("name","viewport");
+        document.head.appendChild(viewportmeta);
+        
+            viewportmeta = document.querySelector('meta[name="viewport"]');
+        }
+        viewportmeta.setAttribute('content', "initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0");
+        console.log(document.querySelector('meta[name="viewport"]'));
         // restyle for mobile
         let styles = `
         body {
