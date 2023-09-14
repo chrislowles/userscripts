@@ -8,8 +8,8 @@
 // @downloadURL  https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
 // @author       chrishazfun
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=x.com
-// @include      http*://*.twitter.com/*
-// @include      http*://*.x.com/*
+// @match      http*://*.twitter.com/*
+// @match      http*://*.x.com/*
 // ==/UserScript==
 
 window.location.href = "https://youtu.be/dQw4w9WgXcQ";
