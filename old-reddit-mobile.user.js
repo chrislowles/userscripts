@@ -1,12 +1,16 @@
 // ==UserScript==
 // @name         Old Reddit Mobile
-// @namespace    http://chrishaz.fun/
-// @version      1.2.0
-// @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain.pw's "Old Reddit Please!"
+// @namespace    https://github.com/chrishazfun
+// @version      1.2.1
+// @description  Redirects www.reddit to an optimized version of old.reddit, uses code from Kain's "Old Reddit Please!"
+// @source       https://github.com/chrishazfun
+// @updateURL    https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
+// @downloadURL  https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
 // @author       chrishazfun (chrishaz.fun)
+// @icon         https://www.google.com/s2/favicons?domain=www.reddit.com
+// --
 // @match        *://*.reddit.com/*
 // @exclude      *://www.reddit.com/poll/*
-// @icon         https://www.google.com/s2/favicons?domain=www.reddit.com
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
