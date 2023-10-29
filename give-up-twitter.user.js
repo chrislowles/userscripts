@@ -15,7 +15,9 @@
 if (!(window === window.parent)) {
 	// iframes get it too
 	window.addEventListener('load', function () {
-		window.location.href = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+		setTimeout(() => {
+			window.location.href = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+		}, 800)
 	});
 } else {
 	window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
