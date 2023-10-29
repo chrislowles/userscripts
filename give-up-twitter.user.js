@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Give Up Twitter/X
 // @namespace https://github.com/chrishazfun
-// @version 1.6.1
+// @version 1.6.2
 // @description Redirects any twitter.com/x.com (subdomains too) url and embed to Rick Astleys smash hit.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
@@ -14,9 +14,9 @@
 
 if (!(window === window.parent)) {
 	// iframes get it too
-	setTimeout(() => {
+	window.addEventListener('load', function () {
 		window.location.href = "https://www.youtube.com/embed/dQw4w9WgXcQ";
-	}, 500)
+	});
 } else {
 	window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 }
