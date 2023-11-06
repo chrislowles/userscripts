@@ -5,6 +5,8 @@ Various userscripts, made to varying degrees of quality (Issues welcomed)
 Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster. Here are some I've made, use any userscript manager (my preferred one is [Violentmonkey](https://violentmonkey.github.io/))
 
 ## Ones I've made:
+### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js)
+Tries to force the sessionStorage key that determines what feed you get on Threads to keep you on Following.
 ### [old-reddit-mobile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-mobile.user.js)
 Optimizes old.reddit for mobile, redirects standard Reddit to it also.
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js)
