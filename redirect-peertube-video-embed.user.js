@@ -18,7 +18,6 @@ if (
   window.location.href = document.querySelectorAll("meta[property='og:video:secure_url']")[0].getAttribute("content");
 }
 
-
 // set title on fullscreen-ish embed page redirect
 if (
   document.querySelectorAll("meta[property='og:platform']").length > 0 &&
