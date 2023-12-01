@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name Redirect PeerTube Video to Fullscreen Embed
-// @namespace https://github.com/chrishazfun
-// @version 1.0.11
+// @namespace https://github.com/chrislowles
+// @version 1.0.12
 // @description Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through Mastodon or other ActivityPub-supported platforms.
-// @source https://github.com/chrishazfun
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js
-// @author chrishazfun
+// @source https://github.com/chrislowles
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-peertube-video-embed.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-peertube-video-embed.user.js
+// @author Chris Lowles
 // @icon https://www.google.com/s2/favicons?sz=64&domain=joinpeertube.org
 // ==/UserScript==
 

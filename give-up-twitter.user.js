@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name Give Up Twitter/X
-// @namespace https://github.com/chrishazfun
-// @version 1.6.6
+// @namespace https://github.com/chrislowles
+// @version 1.6.7
 // @description Redirects any twitter.com/x.com (subdomains too) url and embed to Rick Astleys smash hit.
-// @source https://github.com/chrishazfun
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
-// @author chrishazfun
+// @source https://github.com/chrislowles
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
+// @author Chris Lowles
 // @icon https://www.google.com/s2/favicons?sz=64&domain=x.com
 // @match http*://*.twitter.com/*
 // @match http*://*.x.com/*
