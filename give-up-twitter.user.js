@@ -12,6 +12,8 @@
 // @match http*://*.x.com/*
 // ==/UserScript==
 
+// [document.querySelectorAll("blockquote.twitter-tweet")].map(i => i.replaceWith(``))
+
 if (!(window === window.parent)) {
 	// iframes get it too
 	window.addEventListener('load', function () {
