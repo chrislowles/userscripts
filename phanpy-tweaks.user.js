@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Tweaks for Phanpy.social
 // @namespace https://github.com/chrishazfun
-// @version 1.0.1
+// @version 1.0.2
 // @description Small tweaks for Phanpy.social, a minimal Mastodon client.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/phanpy-tweaks.user.js
@@ -12,16 +12,20 @@
 // ==/UserScript==
 
 setTimeout(function() {
-  let stylesEl = document.createElement("style");
-  stylesEl.innerHTML = `
+  let phanpyStyles = document.createElement("style");
+  phanpyStyles.innerHTML = `
 *, * * {
   animation: unset !important;
   transition: unset !important;
+}
+
+#compose-container .status-preview {
+  max-height: unset;
 }
 
 #generic-accounts-container .accounts-list li {
     flex-basis: 100% !important;
 }
   `;
-  document.querySelector("head").prepend(stylesEl);
+  document.querySelector("head").prepend(phanpyStyles);
 }, 1);
