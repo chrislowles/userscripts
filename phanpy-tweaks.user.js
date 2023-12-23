@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Tweaks for Phanpy.social
 // @namespace https://github.com/chrishazfun
-// @version 1.0.4
+// @version 1.0.41
 // @description Small tweaks for Phanpy.social, a minimal Mastodon client.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/phanpy-tweaks.user.js
@@ -20,7 +20,7 @@ setTimeout(function() {
 }
 
 #compose-container .status-preview {
-  max-height: unset;
+  max-height: unset !important;
 }
 
 #generic-accounts-container .accounts-list li {
