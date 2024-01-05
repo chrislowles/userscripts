@@ -5,6 +5,8 @@ Various userscripts, made to varying degrees of quality (Issues welcomed)
 Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster. Here are some I've made, use any userscript manager (my preferred one is [Violentmonkey](https://violentmonkey.github.io/))
 
 ## Ones I've made:
+### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ap-open-remote-profile.user.js)
+Simple script to add button that opens remote profile in a home instance of software, generic just in case.
 ### [redirect-peertube-video-embed.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js)
 Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through Mastodon or other ActivityPub-supported platforms.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js)
