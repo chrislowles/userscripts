@@ -37,7 +37,7 @@ if (window.location.host == "old.reddit.com") {
 			display: flex;
 			flex-direction: column;
 		}
-		.listingsignupbar, .commentsignupbar {
+		.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar {
 			display: none !important;
 		}
 		.side {
@@ -49,6 +49,9 @@ if (window.location.host == "old.reddit.com") {
 		}
 		#search input[type="text"] {
 			width: 100%
+		}
+		#header-bottom-right {
+			line-height: 9px;
 		}
 		#header { order: 1; }
 		.side { order: 3; }
