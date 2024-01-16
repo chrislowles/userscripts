@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name Force Following Feed on Threads
 // @namespace https://github.com/chrishazfun
-// @version 1.0.53
-// @description Tries to force Threads to stay on Following by checking sessionStorage keys.
+// @version 1.0.54
+// @description Tries to force Threads to stay on Following by checking sessionStorage keys and refreshing on load detection of "For You" feeds being used.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
