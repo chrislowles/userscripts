@@ -9,7 +9,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
 
     // Waits for a node to exist before returning it
     function getNode(selector) {
