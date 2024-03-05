@@ -11,8 +11,8 @@ Simple script to add button that opens remote profile in a home instance of soft
 Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through Mastodon or other ActivityPub-supported platforms.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js)
 Tries to force the sessionStorage key that determines what feed you get on Threads to keep you on Following.
-### [old-reddit-mobile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-mobile.user.js)
-Optimizes old.reddit for mobile, redirects standard Reddit to it also.
+### [old-reddit-and-fixes.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js)
+Redirects www.reddit to old.reddit and optimizes it for mobile.
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js)
 Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google-bing.user.js)
