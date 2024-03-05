@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name Old Reddit & Fixes
 // @namespace https://github.com/chrishazfun
-// @version 1.2.63
-// @description Redirects www.reddit to an optimized version of old.reddit, uses code from "Old Reddit Please!"
+// @version 1.2.65
+// @description Comphrehensive script to redirect Reddit to an optimized version of old.reddit, with styles to clean CTAs for "New" Reddit and also code from "Old Reddit Please!"
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js
@@ -59,7 +59,7 @@ if (window.location.host == "old.reddit.com" && window.mobileAndTabletCheck() ==
 			display: flex;
 			flex-direction: column;
 		}
-		.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar {
+		.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar, #redesign-beta-optin-btn {
 			display: none !important;
 		}
 		.side {
@@ -84,6 +84,15 @@ if (window.location.host == "old.reddit.com" && window.mobileAndTabletCheck() ==
 		document.querySelector("head").prepend(stylesEl);
 	}, 5);
 }
+
+// styles from mobile cut out to also effect desktop use, these things are just shit anywhere you are
+let stylesEl = document.createElement("style");
+stylesEl.innerHTML = `
+#redesign-beta-optin-btn {
+	display: none !important;
+}
+`;
+document.querySelector("head").prepend(stylesEl);
 
 // >>> OLD-REDDIT-PLEASE <<<
 
