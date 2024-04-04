@@ -35,64 +35,57 @@ window.mobileAndTabletCheck = function() {
 };
 
 // simple styles to make site functional, without changing anything really
-if (window.location.host == "old.reddit.com" && window.mobileAndTabletCheck() == true) {
-	// personally, synced my userscripts on violentmonkey to both mobile and desktop so i need to actually check for mobile use in the script now lol
-	if (document.querySelectorAll("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").length > 0) {
-		// clear out custom styles, most of them are broken now anyway
-		document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
+if (window.location.host == "old.reddit.com") {
+	if (window.mobileAndTabletCheck() == true) {
+		// personally, synced my userscripts on violentmonkey to both mobile and desktop so i need to actually check for mobile use in the script now lol
+		if (document.querySelectorAll("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").length > 0) {
+			// clear out custom styles, most of them are broken now anyway
+			document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
+		}
+		setTimeout(() => {
+			// viewport is non-standard, fixing that
+			document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
+			// scaling for zoom glitch, force it
+			let viewportMeta = document.querySelector('meta[name="viewport"]');
+			if (viewportMeta === null) {
+				viewportMeta = document.createElement("meta");
+				viewportMeta.setAttribute("name", "viewport");
+				document.head.appendChild(viewportMeta);
+				viewportMeta = document.querySelector('meta[name="viewport"]');
+			}
+			viewportMeta.setAttribute('content', "initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0");
+			let stylesEl = document.createElement("style");
+			stylesEl.innerHTML = `
+			body {
+				display: flex;
+				flex-direction: column;
+			}
+			.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar {
+				display: none !important;
+			}
+			.side {
+				float: unset !important;
+				width: unset !important;
+			}
+			.panestack-title {
+				border-bottom: unset !important;
+			}
+			#search input[type="text"] {
+				width: 100%
+			}
+			#header-bottom-right {
+				line-height: 9px;
+			}
+			#header { order: 1; }
+			.side { order: 3; }
+			.content { order: 2; }
+			.footer-parent { order: 4; }
+			.debuginfo { order: 5; }
+			`;
+			document.querySelector("head").prepend(stylesEl);
+		}, 5);
 	}
-	setTimeout(() => {
-		// viewport is non-standard, fixing that
-		document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
-		// scaling for zoom glitch, force it
-		let viewportMeta = document.querySelector('meta[name="viewport"]');
-		if (viewportMeta === null) {
-			viewportMeta = document.createElement("meta");
-			viewportMeta.setAttribute("name", "viewport");
-			document.head.appendChild(viewportMeta);
-			viewportMeta = document.querySelector('meta[name="viewport"]');
-		}
-		viewportMeta.setAttribute('content', "initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0");
-		let stylesEl = document.createElement("style");
-		stylesEl.innerHTML = `
-		body {
-			display: flex;
-			flex-direction: column;
-		}
-		.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar, #redesign-beta-optin-btn {
-			display: none !important;
-		}
-		.side {
-			float: unset !important;
-			width: unset !important;
-		}
-		.panestack-title {
-			border-bottom: unset !important;
-		}
-		#search input[type="text"] {
-			width: 100%
-		}
-		#header-bottom-right {
-			line-height: 9px;
-		}
-		#header { order: 1; }
-		.side { order: 3; }
-		.content { order: 2; }
-		.footer-parent { order: 4; }
-		.debuginfo { order: 5; }
-		`;
-		document.querySelector("head").prepend(stylesEl);
-	}, 5);
 }
-
-// styles from mobile cut out to also effect desktop use, these things are just shit anywhere you are
-let stylesEl = document.createElement("style");
-stylesEl.innerHTML = `
-#redesign-beta-optin-btn {
-	display: none !important;
-}
-`;
-document.querySelector("head").prepend(stylesEl);
 
 // >>> OLD-REDDIT-PLEASE <<<
 
