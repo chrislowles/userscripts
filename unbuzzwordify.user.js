@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Unbuzzwordify
 // @namespace https://github.com/chrishazfun
-// @version 1.5.51
+// @version 1.5.52
 // @description Replaces buzzwords with other, more entertaining words.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js
@@ -10,12 +10,13 @@
 // @icon https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.png
 // -- sites that break with this
 // @exclude-match *://onlyfans.com/*
-// @exclude-match *://*pcpartpicker*/*
+// @exclude-match *://*pcpartpicker.com/*
+// @exclude-match *://*.pcpartpicker.com.au/*
 // @exclude-match *://webapp.licenceready.com.au/*
 // @exclude-match *://*.deviantart.com/*
 // @exclude-match *://*.bandcamp.com/*
-// @exclude-match *://*codetasty.com/*
-// @exclude-match *://*vscode.dev/*
+// @exclude-match *://*.codetasty.com/*
+// @exclude-match *://*.vscode.dev/*
 // ==/UserScript==
 
 function unbuzzwordify() {

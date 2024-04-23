@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name Redirect supported Lemmy instances to mlmym Interface (WIP)
+// @name Redirect Lemmy To mlmym Interface (WIP)
 // @namespace https://github.com/chrishazfun
-// @version 1.0.11
+// @version 1.0.12
 // @description Redirects supported Lemmy instances to their installed mlmym interface, which tries to emulate the interface of old.reddit
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-lemmy-mlmym.user.js

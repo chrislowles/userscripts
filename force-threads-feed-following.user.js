@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name Force Following Feed on Threads
 // @namespace https://github.com/chrishazfun
-// @version 1.0.56
-// @description Tries to force Threads to stay on Following by checking sessionStorage keys and refreshing on load detection of "For You" feeds being used.
+// @version 1.0.6
+// @description Uses multiple methods to force Threads to load in as Chronological by default.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
