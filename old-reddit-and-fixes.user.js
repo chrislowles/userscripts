@@ -1,30 +1,23 @@
 // ==UserScript==
 // @name Old Reddit & Fixes
 // @namespace https://github.com/chrishazfun
-// @version 1.2.65
-// @description Comphrehensive script to redirect Reddit to an optimized version of old.reddit, with styles to clean CTAs for "New" Reddit and also code from "Old Reddit Please!"
+// @version 1.2.7
+// @description Comphrehensive script to redirect Reddit to an optimized version of old.reddit, with styles to clean call-to-actions for "New" Reddit and also code from "Old Reddit Please!", basically pretend Reddit didn't completely fuck up their website.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js
 // @author chrishazfun
 // @icon https://www.google.com/s2/favicons?domain=www.reddit.com
-// --
-// @match *://*.reddit.com/*
-// @exclude *://www.reddit.com/poll/*
-// @grant none
+// @grant GM_addStyle
 // @run-at document-start
+// --
+// @match https://*.reddit.com/*
+// @exclude https://*.reddit.com/poll/*
+// @exclude https://*.reddit.com/gallery/*
+// @exclude https://www.reddit.com/media*
+// @exclude https://chat.reddit.com/*
+// @exclude https://www.reddit.com/appeal*
 // ==/UserScript==
-
-function waitForEl(el) {
-	return new Promise((resolve, reject) => {
-		const intervalId = setInterval(() => {
-			if (document.querySelector(el)) {
-				clearInterval(intervalId);
-				resolve();
-			}
-		}, 500);
-	});
-}
 
 window.mobileAndTabletCheck = function() {
 	let check = false;
@@ -34,136 +27,56 @@ window.mobileAndTabletCheck = function() {
 	return check;
 };
 
-// simple styles to make site functional, without changing anything really
-if (window.location.host == "old.reddit.com") {
-	if (window.mobileAndTabletCheck() == true) {
-		// personally, synced my userscripts on violentmonkey to both mobile and desktop so i need to actually check for mobile use in the script now lol
-		if (document.querySelectorAll("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").length > 0) {
-			// clear out custom styles, most of them are broken now anyway
-			document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
-		}
-		setTimeout(() => {
-			// viewport is non-standard, fixing that
-			document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
-			// scaling for zoom glitch, force it
-			let viewportMeta = document.querySelector('meta[name="viewport"]');
-			if (viewportMeta === null) {
-				viewportMeta = document.createElement("meta");
-				viewportMeta.setAttribute("name", "viewport");
-				document.head.appendChild(viewportMeta);
-				viewportMeta = document.querySelector('meta[name="viewport"]');
-			}
-			viewportMeta.setAttribute('content', "initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0");
-			let stylesEl = document.createElement("style");
-			stylesEl.innerHTML = `
-			body {
-				display: flex;
-				flex-direction: column;
-			}
-			.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar {
-				display: none !important;
-			}
-			.side {
-				float: unset !important;
-				width: unset !important;
-			}
-			.panestack-title {
-				border-bottom: unset !important;
-			}
-			#search input[type="text"] {
-				width: 100%
-			}
-			#header-bottom-right {
-				line-height: 9px;
-			}
-			#header { order: 1; }
-			.side { order: 3; }
-			.content { order: 2; }
-			.footer-parent { order: 4; }
-			.debuginfo { order: 5; }
-			`;
-			document.querySelector("head").prepend(stylesEl);
-		}, 5);
+let oldReddit = window.location.protocol + "//" + "old.reddit.com" + window.location.pathname + window.location.search + window.location.hash;
+window.location.replace(oldReddit);
+
+// Styles to make site functional for both mobile and desktop, adjusting metatags that mess up some other functionality
+// Synced my userscripts on Violentmonkey to both mobile and desktop and realized I need to actually check for mobile use in the script now lol
+if (window.location.host == "old.reddit.com" && window.mobileAndTabletCheck() == true) {
+
+	// Clear out custom styles, most of them are broken now anyway
+	if (document.querySelectorAll("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").length > 0) {
+		document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
 	}
-}
 
-// >>> OLD-REDDIT-PLEASE <<<
-
-// Used for optimization when there's too many links on a page
-const use_optimization = true;
-
-// Number of links on the page before using optimization
-const opti_threshold = 250;
-const opti_dataname = 'orp40897';
-
-// Time between each cleanup (in ms)
-const clean_interval = 1000;
-
-const log = (msg) => console.log(`[old-reddit-mobile] ${msg}`);
-log("loaded");
-
-/*
-	* Pass a link and return the new one if it's a reddit link.
-	* Anything else and you'll get the original input back.
-*/
-function updateLink(url) {
-	try {
-		var target = new URL(url);
-		if (target.hostname == 'www.reddit.com') {
-			target.hostname = 'old.reddit.com';
-			return target.href;
-		} else return url;
-	} catch(e) {
-		return url;
+	// Fixing nonstandard viewport (STEP 1)
+	// document.querySelector("meta[name='viewport']").setAttribute("content", "width=device-width, initial-scale=1");
+	// Fixing nonstandard viewport (STEP 2, FORCE SCALING)
+	let META_VIEWPORT = document.querySelector('meta[name="viewport"]');
+	if (META_VIEWPORT === null) {
+		META_VIEWPORT = document.createElement("meta");
+		META_VIEWPORT.setAttribute("name", "viewport");
+		document.head.appendChild(META_VIEWPORT);
+		META_VIEWPORT = document.querySelector('meta[name="viewport"]');
+		META_VIEWPORT.setAttribute('content', "initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0");
 	}
-}
 
-// Main Function
-(() => {
-	let ready = true;
-	let last_count = 0;
-	let selector = 'a';
-	const update_links = () => {
-		if (ready) {
-			ready = false;
-			if (use_optimization && last_count >= opti_threshold) {
-				selector = `a:not([data-${opti_dataname}])`;
-			}
-			const links = document.querySelectorAll(selector);
-			last_count = links.length;
-			if (last_count > 0) log('Updated ' + links.length + ' links');
-			for (const link of links) {
-				// Don't clean links that have already been cleaned
-				// This is to prevent slowing down pages when there are a lot of links
-				// For example, endless scroll on reddit
-				if (use_optimization && selector !== 'a') {
-					link.setAttribute(`data-${opti_dataname}`, '1');
-				}
-				try {
-					// Make sure it's a valid URL
-					new URL(link.href);
-					// Run the cleaner
-					const updated = updateLink(link.href);
-					if (updated !== link.href) link.setAttribute('href', updated);
-				} catch (error) {
-					// Ignore invalid URLs
-				}
-			}
-			setTimeout(() => (ready = true), clean_interval);
-		}
-	};
-	const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-	const observer = new MutationObserver(update_links);
-	observer.observe(document, { childList: true, subtree: true });
-	window.addEventListener('load', () => setInterval(update_links, clean_interval));
-	update_links();
-})();
-
-// Text a URL to make sure it's a Reddit domain
-function test(url) {
-	return !!url.match(/^(|http(s?):\/\/)(|www.)reddit.com(\/.*|$)/gim);
-}
-
-if (test(window.location.href)) {
-	window.location.assign(updateLink(window.location.href));
+	// CSS styles for mobile UX
+	GM_addStyle(`
+	body {
+		display: flex;
+		flex-direction: column;
+	}
+	.listingsignupbar, .commentsignupbar, #hsts_pixel, .mobile-web-redirect-bar {
+		display: none !important;
+	}
+	.side {
+		float: unset !important;
+		width: unset !important;
+	}
+	.panestack-title {
+		border-bottom: unset !important;
+	}
+	#search input[type="text"] {
+		width: 100%
+	}
+	#header-bottom-right {
+		line-height: 9px;
+	}
+	#header { order: 1; }
+	.side { order: 3; }
+	.content { order: 2; }
+	.footer-parent { order: 4; }
+	.debuginfo { order: 5; }
+	`);
 }
