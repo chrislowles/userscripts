@@ -6,12 +6,12 @@ Userscripts are extensions written to be installed in userscript managers, the b
 
 ## Ones I've made:
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ap-open-remote-profile.user.js)
-Simple script to add button that opens remote profile in a home instance of software, generic just in case.
+Adds a button that opens remote AP-compatible profiles in your home instance.
 ### [redirect-peertube-video-embed.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js)
-Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through Mastodon or other ActivityPub-supported platforms.
+Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL for people that sub to PeerTube channels through Mastodon or other ActivityPub-compatible platforms.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js)
-Tries to force the sessionStorage key that determines what feed you get on Threads to keep you on Following.
-### [old-reddit-and-fixes.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js)
+Redirect Threads' "For you" default in their front page to the chronological "Following" feed.
+### [old-reddit-and-fixes.user.js (OLD)](https://raw.githubusercontent.com/chrishazfun/userscripts/main/old-reddit-and-fixes.user.js)
 Redirects www.reddit to old.reddit and optimizes it for mobile.
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js)
 Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit. (enable video autoplay in your browsers settings)
@@ -22,7 +22,9 @@ Replaces certain buzzwords with other, more entertaining words.
 ### [unbuzzwordify-woke.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js)
 Same as regular Unbuzzwordify but just for the word woke, like a taster for the full thing.
 ### [zero-out-yt-timestamp.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/zero-out-yt-timestamp.user.js)
-Zeros out most youtube.com timestamps upon loading, might be helpful for certain situations.
+Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
+### [zero-out-yt-timestamp-auto.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/zero-out-yt-timestamp-auto.user.js)
+Same as regular zero-out-yt-timestamp but with no prompt.
 ### [yt-front-to-subs.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-front-to-subs.user.js)
 Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
 
