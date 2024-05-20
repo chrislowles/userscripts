@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Zero Out YT Timestamp (Automatic)
 // @namespace https://github.com/chrishazfun
-// @version 1.0.1
+// @version 1.0.2
 // @description Zeros out any youtube.com timestamp upon load, might be helpful for certain situations.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/zero-out-yt-timestamp-auto.user.js
