@@ -27,6 +27,8 @@ Prompts to zero out most youtube.com timestamps on load, might be helpful for ce
 Same as regular zero-out-yt-timestamp but with no prompt.
 ### [yt-front-to-subs.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-front-to-subs.user.js)
 Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
+### [yt-open-w-freetube.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-open-w-freetube.user.js)
+Adds a button to open the currently opened video in FreeTube (if installed)
 
 ## Ones I use:
 ### [twitterblue-nerd.js](https://gist.githubusercontent.com/busybox11/53c76f57a577a47a19fab649a76f18e3/raw/twitterblue-nerd.js "Right click, copy the url here and import via URL to install properly.")
