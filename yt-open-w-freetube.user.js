@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name YouTube: Open w/ FreeTube
 // @namespace https://github.com/chrishazfun
-// @version 1.0.0
+// @version 1.0.1
 // @description Adds a button to open the currently opened video in FreeTube (if installed)
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-open-w-freetube.user.js
@@ -28,7 +28,7 @@ document.addEventListener("yt-navigate-finish", function(event) {
           <style>
             .open-freetube {
               padding: 10px 12px;
-              margin-left: 12px;
+              margin-left: 8px;
               border-radius: 17px;
               font-size: 13.5px;
               font-weight: bold;
