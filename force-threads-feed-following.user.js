@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Force Following Feed on Threads
 // @namespace https://github.com/chrishazfun
-// @version 1.0.6
+// @version 1.0.7
 // @description Uses multiple methods to force Threads to load in as Chronological by default.
 // @source https://github.com/chrishazfun
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
@@ -14,11 +14,11 @@
 function forceFollowing() {
   if (
     window.location.host == "www.threads.net" &&
-    window.location.pathname == "/" &&
-    new URL(window.location.href).searchParams.get("variant") == null
+    window.location.pathname == "/"
   ) {
-    window.location.href = "https://www.threads.net/?variant=following";
+    window.location.pathname = "/following";
   }
+  document.querySelectorAll("[href='/']").forEach(a => {a.href="/following"});
 }
 
 forceFollowing();
