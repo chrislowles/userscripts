@@ -1,9 +1,8 @@
 // ==UserScript==
 // @name ActivtyPub - Open Remote Profile in Home Instance
-// @namespace https://github.com/chrishazfun
-// @version 0.3
 // @description Adds button that opens remote profile in a home instance, generic just in case.
 // @author chrishazfun
+// @version 0.4
 // @match https://*/*
 // @grant none
 // ==/UserScript==
