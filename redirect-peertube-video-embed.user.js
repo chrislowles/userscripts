@@ -8,20 +8,20 @@
 // ==/UserScript==
 
 if (
-  document.querySelectorAll("meta[property='og:platform']").length > 0 &&
-  document.querySelectorAll("meta[property='og:platform']")[0].getAttribute("content") == "PeerTube" &&
-  document.querySelectorAll(".standalone-video-embed").length < 1
+	document.querySelectorAll("meta[property='og:platform']").length > 0 &&
+	document.querySelectorAll("meta[property='og:platform']")[0].getAttribute("content") == "PeerTube" &&
+	document.querySelectorAll(".standalone-video-embed").length < 1
 ) {
-  window.location.href = document.querySelectorAll("meta[property='og:video:secure_url']")[0].getAttribute("content");
+	window.location.href = document.querySelectorAll("meta[property='og:video:secure_url']")[0].getAttribute("content");
 }
 
 // set title on fullscreen-ish embed page redirect
 if (
-  document.querySelectorAll("meta[property='og:platform']").length > 0 &&
-  document.querySelectorAll("meta[property='og:platform']")[0].getAttribute("content") == "PeerTube" &&
-  document.querySelectorAll(".standalone-video-embed").length == 1
+	document.querySelectorAll("meta[property='og:platform']").length > 0 &&
+	document.querySelectorAll("meta[property='og:platform']")[0].getAttribute("content") == "PeerTube" &&
+	document.querySelectorAll(".standalone-video-embed").length == 1
 ) {
-  setTimeout(function() {
-    document.querySelectorAll("title")[0].innerHTML = document.querySelectorAll(".peertube-dock-title")[0].innerHTML
-  }, 1000);
+	setTimeout(function() {
+		document.querySelectorAll("title")[0].innerHTML = document.querySelectorAll(".peertube-dock-title")[0].innerHTML
+	}, 1000);
 }
