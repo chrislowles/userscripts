@@ -2,7 +2,7 @@
 // @name Unbuzzwordify (Just Woke)
 // @description Replaces specifically the word woke with other, more entertaining words.
 // @author chrishazfun
-// @version 1.7
+// @version 2024.7.15
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify-woke.user.js
 // -- sites that break with this
@@ -14,16 +14,20 @@
 // @exclude-match *://*.bandcamp.com/*
 // @exclude-match *://*.codetasty.com/*
 // @exclude-match *://*.vscode.dev/*
+// @exclude-match *://*.x.com/*
 // ==/UserScript==
 
 function unbuzzwordify() {
-	var elements = document.querySelectorAll('*:not(textarea,input,.r-1h8ys4a.r-kemksi.css-1dbjc4n > div.css-1dbjc4n:nth-of-type(1) > .css-1dbjc4n > .r-ymttw5.css-1dbjc4n *)');
+	var elements = document.querySelectorAll('*:not(textarea,input)');
 	var phrases = [
 		"WAH",
 		"GOATSE",
 		"BIG FAT CAWK",
-		"WAP",
-		"AIRPLANES FULL OF SNAKES"
+		"DEEZ NUTS",
+		"AIRPLANES FULL OF SNAKES",
+		"HOLY SHIT THEY HIT THE PENTAGON",
+		"CLAM CHOWDEh",
+		"PROLAPSED ANUS"
 	];
 	for (var i = 0; i < elements.length; i++) {
 		var element = elements[i];

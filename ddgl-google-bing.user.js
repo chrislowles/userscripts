@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name DDG Lite > Google or Bing
-// @description Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
+// @description Adds two shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 // @author chrishazfun
-// @version 1.1
-// @match http*://lite.duckduckgo.com/lite*?q=*
+// @version 2024.7.15
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google-bing.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/ddgl-google-bing.user.js
+// @match http*://lite.duckduckgo.com/lite*?q=*
 // ==/UserScript==
 
 let google = document.createElement('a');

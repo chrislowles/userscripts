@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name Redirect PeerTube Video to Fullscreen Embed
-// @description Redirects detected PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through Mastodon or other ActivityPub-supported platforms.
+// @name Redirect PeerTube Video to Fullscreen Embed (WIP)
+// @description Redirects detected PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through ActivityPub-compatible platforms that aren't PeerTube.
 // @author chrishazfun
-// @version 1.1
+// @version 2024.7.15
 // @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js
 // @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/redirect-peertube-video-embed.user.js
 // ==/UserScript==

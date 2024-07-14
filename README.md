@@ -4,6 +4,9 @@ Various userscripts, made to varying degrees of quality (Issues welcomed)
 ## What are userscripts?
 Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster. Here are some I've made, use any userscript manager (my preferred one is [Violentmonkey](https://violentmonkey.github.io/))
 
+## Versioning:
+The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional hotfixes.
+
 ## Ones I've made:
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrishazfun/userscripts/main/ap-open-remote-profile.user.js)
 Adds a button that opens remote AP-compatible profiles in your home instance.
