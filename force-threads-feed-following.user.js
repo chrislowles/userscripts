@@ -9,13 +9,13 @@
 // ==/UserScript==
 
 function forceFollowing() {
-  if (
-    window.location.host == "www.threads.net" &&
-    window.location.pathname == "/"
-  ) {
-    window.location.pathname = "/following";
-  }
-  document.querySelectorAll("[href='/']").forEach(a => {a.href="/following"});
+	if (
+		window.location.host == "www.threads.net" &&
+		window.location.pathname == "/"
+	) {
+		window.location.pathname = "/following";
+	}
+	document.querySelectorAll("[href='/']").forEach(a => {a.href="/following"});
 }
 
 forceFollowing();
