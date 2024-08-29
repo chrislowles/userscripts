@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name YouTube: Subscribe w/ RSS Parrot (WIP)
 // @description Shortcut to ask RSS Parrot to create rss bot for YouTube channel that you can follow, used as alternative for subscribing.
-// @author chrishazfun
-// @version 2024.7.15-1
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-sub-w-rss-parrot.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/yt-sub-w-rss-parrot.user.js
+// @author Chris Lowles
+// @version 2024.8.30
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
 // @match http*://www.youtube.com/*
 // @run-at document-start

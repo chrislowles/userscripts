@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name Unbuzzwordify
 // @description Replaces buzzwords with other, more entertaining words.
-// @author chrishazfun
-// @version 2024.7.15
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/unbuzzwordify.user.js
+// @author Chris Lowles
+// @version 2024.8.30
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js
 // -- sites that break with this
 // @exclude-match *://onlyfans.com/*
 // @exclude-match *://*pcpartpicker.com/*

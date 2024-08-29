@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name Give Up Twitter/X
 // @description Redirects any twitter.com/x.com (subdomains too) url and embed to Rick Astleys smash hit.
-// @author chrishazfun
-// @version 2024.7.15-3
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/give-up-twitter.user.js
+// @author Chris Lowles
+// @version 2024.8.30
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
 // @match http*://*.x.com/*
 // @match http*://*.twitter.com/*
 // @match http*://pbs.twimg.com/*

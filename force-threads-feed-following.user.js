@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name Force Following Feed on Threads
 // @description Uses multiple methods to force Threads to load in as Chronological by default.
-// @author chrishazfun
-// @version 2024.7.15
-// @updateURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
-// @downloadURL https://raw.githubusercontent.com/chrishazfun/userscripts/main/force-threads-feed-following.user.js
+// @author Chris Lowles
+// @version 2024.8.30
+// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
 // @match http*://www.threads.net/*
 // ==/UserScript==
 
