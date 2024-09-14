@@ -2,7 +2,7 @@
 // @name YouTube: Open w/ FreeTube
 // @description Adds a button to open the currently opened video in FreeTube (if installed)
 // @author Chris Lowles
-// @version 2024.8.30
+// @version 2024.9.14
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-w-freetube.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-w-freetube.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
@@ -10,11 +10,11 @@
 // @run-at document-start
 // ==/UserScript==
 
-document.addEventListener("yt-navigate-start", function() {
+document.addEventListener("yt-navigate-start", function () {
   document.querySelector("openwft").remove();
 });
 
-document.addEventListener("yt-navigate-finish", function(event) {
+document.addEventListener("yt-navigate-finish", function (event) {
   console.log(event.detail.pageType, event);
   if (event.detail.pageType == "watch") {
     waitForKeyElements("#bottom-row #owner", () => {

@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name YouTube: Subscribe w/ RSS Parrot (WIP)
-// @description Shortcut to ask RSS Parrot to create rss bot for YouTube channel that you can follow, used as alternative for subscribing.
+// @description Shortcut to ask RSS Parrot to create an RSS bot for YouTube channel that you can then follow, can be used as alternative for subscribing, pairs well with yt-open-w-freetube-auto.
 // @author Chris Lowles
-// @version 2024.8.30
+// @version 2024.9.14
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
@@ -10,18 +10,18 @@
 // @run-at document-start
 // ==/UserScript==
 
-document.addEventListener("yt-navigate-start", function() {
+document.addEventListener("yt-navigate-start", function () {
   document.querySelector("subwrss").remove();
 });
 
 function setMstInst(inst) {
   if (localStorage.getItem("mstinst-set") == null) {
     let instPrompt = prompt("You haven't set an instance yet, please do so.")
-    
+
   }
 }
 
-document.addEventListener("yt-navigate-finish", function(event) {
+document.addEventListener("yt-navigate-finish", function (event) {
   console.log(event.detail.pageType, event);
   if (event.detail.pageType == "watch") {
     waitForKeyElements("#bottom-row #owner", () => {

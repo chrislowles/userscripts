@@ -2,7 +2,7 @@
 // @name Redirect Lemmy To mlmym Interface (WIP)
 // @description Redirects supported Lemmy instances to their installed mlmym interface, which tries to emulate the interface of old.reddit
 // @author Chris Lowles
-// @version 2024.8.30
+// @version 2024.9.14
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-lemmy-mlmym.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-lemmy-mlmym.user.js
 // ==/UserScript==
