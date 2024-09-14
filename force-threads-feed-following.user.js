@@ -18,7 +18,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 		) {
 			window.location.pathname = "/following";
 		}
-		document.querySelectorAll("[href='/']").forEach(a => { a.href="/following" });
+		document.querySelectorAll("[href='/']").forEach(a => { a.href = "/following" });
 	}
 	forceFollowing();
 	setInterval(forceFollowing, 1000);
