@@ -20,14 +20,12 @@
 function unbuzzwordify() {
 	var elements = document.querySelectorAll('*:not(textarea,input)');
 	var phrases = [
-		"WAH",
 		"GOATSE",
 		"BIG FAT CAWK",
 		"DEEZ NUTS",
 		"AIRPLANES FULL OF SNAKES",
 		"HOLY SHIT THEY HIT THE PENTAGON",
-		"CLAM CHOWDEh",
-		"PROLAPSED ANUS"
+		"Restauraunt QR Code Menu"
 	];
 	for (var i = 0; i < elements.length; i++) {
 		var element = elements[i];
