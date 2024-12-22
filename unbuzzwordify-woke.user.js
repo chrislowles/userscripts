@@ -2,7 +2,7 @@
 // @name Unbuzzwordify (Just Woke)
 // @description Replaces specifically the word woke with other, more entertaining words.
 // @author Chris Lowles
-// @version 2024.9.14
+// @version 2024.12.23
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify-woke.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify-woke.user.js
 // -- sites that break with this
