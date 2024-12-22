@@ -8,12 +8,14 @@ Userscripts are extensions written to be installed in userscript managers, the b
 The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional hotfixes.
 
 ## Ones I've made:
+### [anti-murdoch.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/anti-murdoch.user.js)
+Checks if you're on a Murdoch-owned publication and asks if you wanna open the page or article in the Wayback Machine.
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ap-open-remote-profile.user.js)
 Adds a button that opens remote AP-compatible profiles in your home instance.
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ddgl-google-bing.user.js)
 Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js)
-Redirect Threads' "For you" default in their front page to the chronological "Following" feed.
+Redirect Threads' "For you" default in their front page to the chronological "Following" feed [MAY BE DEPRECATED SOON]
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js)
 Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit.
 ### [redirect-lemmy-mlmym.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-lemmy-mlmym.user.js)
@@ -28,9 +30,5 @@ Replaces certain buzzwords with other, more entertaining words.
 Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
 ### [yt-open-w-freetube.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-w-freetube.user.js)
 Adds a button to open the currently opened video in FreeTube (if installed)
-### [yt-open-w-freetube-auto.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-w-freetube-auto.user.js)
-Adds a prompt to open any YouTube video link in FreeTube (if installed)
 ### [zero-out-yt-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js)
 Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
-### [zero-out-yt-timestamp-auto.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp-auto.user.js)
-Same as regular zero-out-yt-timestamp but with no prompt.
