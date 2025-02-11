@@ -6,6 +6,8 @@
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @match http*://www.youtube.com/*
+// @grant GM.addStyle
+// @grant GM_addStyle
 // ==/UserScript==
 
 document.addEventListener("yt-navigate-finish", function (event) {
