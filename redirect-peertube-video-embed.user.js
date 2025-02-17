@@ -1,8 +1,9 @@
 // ==UserScript==
+// @run-at document-start
 // @name Redirect PeerTube Video to Fullscreen Embed (WIP)
 // @description Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL userscript for people that sub to PeerTube channels through ActivityPub-compatible platforms that aren't PeerTube.
 // @author Chris Lowles
-// @version 2024.12.23
+// @version 2025.2.17
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-peertube-video-embed.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-peertube-video-embed.user.js
 // ==/UserScript==
