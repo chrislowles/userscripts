@@ -15,7 +15,7 @@ Adds a button that opens remote AP-compatible profiles in your home instance.
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ddgl-google-bing.user.js)
 Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js)
-Redirect Threads' "For you" default in their front page to the chronological "Following" feed [MAY BE DEPRECATED SOON]
+Uses multiple methods to ensure you never have to see For You on Threads, works on Mobile and Desktop.
 ### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js)
 Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit.
 ### [redirect-lemmy-mlmym.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-lemmy-mlmym.user.js)
