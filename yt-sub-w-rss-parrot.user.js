@@ -1,13 +1,13 @@
 // ==UserScript==
+// @run-at document-start
 // @name YouTube: Subscribe w/ RSS Parrot (WIP)
 // @description Shortcut to ask RSS Parrot to create an RSS bot for YouTube channel that you can then follow, can be used as alternative for subscribing, pairs well with yt-open-w-freetube-auto.
 // @author Chris Lowles
-// @version 2024.12.23
+// @version 2025.2.17
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
 // @match http*://www.youtube.com/*
-// @run-at document-start
 // ==/UserScript==
 
 document.addEventListener("yt-navigate-start", function () {
