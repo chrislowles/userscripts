@@ -3,7 +3,7 @@
 // @name Force Following Feed on Threads
 // @description Uses multiple methods to ensure you never have to see For You on Threads, works on Mobile and Desktop.
 // @author Chris Lowles
-// @version 2025.2.17
+// @version 2025.3.13
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
 // @match http*://www.threads.net/*
@@ -16,9 +16,7 @@ if (window.mobileCheck() == true) {
 	// mobile device
 	console.log("is mobile");
 	function forceFollowing() {
-	  if (
-		window.location.pathname == "/"
-	  ) {
+	  if (window.location.pathname == "/") {
 		window.location.pathname = "/following";
 	  }
 	  document.querySelectorAll("[href='/']").forEach(a => {

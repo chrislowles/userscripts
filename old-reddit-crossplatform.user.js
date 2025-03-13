@@ -5,7 +5,7 @@
 // @description Redirects any reddit url except for "/media", "/gallery" or "/poll" to old.reddit. Fixes the "Funny Hat" redirect. Implements Oldlander when on Mobile. For the oddly specific scenario for when you have Firefox on desktop and mobile and have a Userscript manager synced on both.
 // @author Chris Lowles
 // @icon https://www.google.com/s2/favicons?sz=64&domain=reddit.com
-// @version 2025.2.17
+// @version 2025.3.13
 // @license BSD Zero Clause License
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/old-reddit-crossplatform.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/old-reddit-crossplatform.user.js

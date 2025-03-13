@@ -3,12 +3,10 @@
 // @name Zero Out YT Timestamp
 // @description Prompts to zero out any youtube.com timestamp upon load, might be helpful for certain situations.
 // @author Chris Lowles
-// @version 2025.2.17
+// @version 2025.3.13
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @match http*://www.youtube.com/*
-// @grant GM.addStyle
-// @grant GM_addStyle
 // ==/UserScript==
 
 document.addEventListener("yt-navigate-finish", function (event) {
