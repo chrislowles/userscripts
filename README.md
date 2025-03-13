@@ -5,9 +5,11 @@ Various userscripts, made to varying degrees of quality (Issues welcomed)
 Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster. My preferred one is [Violentmonkey](https://violentmonkey.github.io/).
 
 ## Versioning:
-The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional hotfixes.
+The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional patches.
 
 ## Ones I've made:
+### [old-reddit-crossplatform.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/old-reddit-crossplatform.user.js)
+Redirects any Reddit url except for "/media", "/gallery" or "/poll" to old.reddit. Fixes the "Funny Hat" redirect quirk and implements Oldlander when on Mobile. For the oddly specific scenario for when you have Firefox on desktop and mobile and have a Userscript manager synced on both.
 ### [gloves.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js)
 Gloves for when you're made to read or interact with oligarch-run media.
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ap-open-remote-profile.user.js)
