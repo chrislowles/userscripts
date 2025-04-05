@@ -8,8 +8,8 @@ Userscripts are extensions written to be installed in userscript managers, the b
 The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional patches.
 
 ## Ones I've made:
-### [old-reddit-crossplatform.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/old-reddit-crossplatform.user.js)
-Redirects any Reddit url except for "/media", "/gallery" or "/poll" to old.reddit. Fixes the "Funny Hat" redirect quirk and implements Oldlander when on Mobile. For the oddly specific scenario for when you have Firefox on desktop and mobile and have a Userscript manager synced on both.
+### [canonical-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js)
+Automatically redirect news links to the original source site, based on MSN Redirector by Jamie Landeg-Jones.
 ### [gloves.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js)
 Gloves for when you're made to read or interact with oligarch-run media.
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ap-open-remote-profile.user.js)
