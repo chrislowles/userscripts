@@ -2,9 +2,9 @@
 // @run-at document-start
 // @name Canonical Redirector
 // @license MIT
-// @description Automatically redirect news links to the original source site, based on MSN Redirector by Jamie Landeg-Jones
-// @author Jamie Landeg-Jones, Chris Lowles
-// @version 2025.4.5-2
+// @description Automatically redirect referral articles to the original source, based on MSN Redirector by Jamie Landeg-Jones
+// @author Chris Lowles, Jamie Landeg-Jones
+// @version 2025.4.5-3
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @grant none
@@ -26,7 +26,10 @@
 				if (link_tags[loop].rel && link_tags[loop].rel == 'canonical') {
 					const new_url = link_tags[loop].href;
 					doneit = 1;
-					if (new_url.match("^https:\/\/(www\.)?yahoo.com\/") || new_url.match("^https:\/\/(www\.)?msn.com\/")) {
+					if (
+						new_url.match("^https:\/\/(www\.)?yahoo.com\/") ||
+						new_url.match("^https:\/\/(www\.)?msn.com\/")
+					) {
 						console.info(`Canonical Redirect: Ignoring redirect (same site): ${new_url}`);
 					} else {
 						console.info(`Canonical Redirect: Redirecting to ${new_url}`);
