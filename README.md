@@ -9,7 +9,7 @@ The versioning on the userscripts is defined by year.month.day-hotfix, for examp
 
 ## Ones I've made:
 ### [canonical-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js)
-Automatically redirect news links to the original source site, based on MSN Redirector by Jamie Landeg-Jones.
+Automatically redirect referral articles of supported outlets to their original source, based on MSN Redirector by Jamie Landeg-Jones.
 ### [gloves.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js)
 Gloves for when you're made to read or interact with oligarch-run media.
 ### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ap-open-remote-profile.user.js)
