@@ -4,7 +4,7 @@
 // @license MIT
 // @description Automatically redirect news links to the original source site, based on MSN Redirector by Jamie Landeg-Jones
 // @author Jamie Landeg-Jones, Chris Lowles
-// @version 2025.4.5-1
+// @version 2025.4.5-2
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @grant none
@@ -22,7 +22,7 @@
 		let doneit = 0;
 		let tryNow = function() {
 			let link_tags = document.getElementsByTagName('link');
-			for (let loop=0; loop < link_tags.length; loop++) {
+			for (let loop = 0; loop < link_tags.length; loop++) {
 				if (link_tags[loop].rel && link_tags[loop].rel == 'canonical') {
 					const new_url = link_tags[loop].href;
 					doneit = 1;
@@ -30,7 +30,7 @@
 						console.info(`Canonical Redirect: Ignoring redirect (same site): ${new_url}`);
 					} else {
 						console.info(`Canonical Redirect: Redirecting to ${new_url}`);
-						window.location = new_url
+						window.location = new_url;
 					}
 				}
 			}
