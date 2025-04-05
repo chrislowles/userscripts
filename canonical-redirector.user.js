@@ -4,12 +4,12 @@
 // @license MIT
 // @description Automatically redirect news links to the original source site, based on MSN Redirector by Jamie Landeg-Jones
 // @author Jamie Landeg-Jones, Chris Lowles
-// @version 2025.4.5
+// @version 2025.4.5-1
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @grant none
 // -- SUPPORTED SITES --
-// @match https://www.yahoo.com/*
+// @match https://*.yahoo.com/*
 // @match https://www.msn.com/*
 // ==/UserScript==
 
