@@ -4,7 +4,7 @@
 // @license MIT
 // @description Automatically redirect referral articles to the original source, based on MSN Redirector by Jamie Landeg-Jones.
 // @author Chris Lowles, Jamie Landeg-Jones
-// @version 2025.5.8
+// @version 2025.6.19
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @grant none
@@ -17,7 +17,8 @@
 
 (function() {
 	'use strict';
-	function redirect_to_article() {
+	// Run the filter when the page loads
+	window.addEventListener('load', function() {
 		let numAttempts = 0;
 		let doneit = 0;
 		let tryNow = function() {
@@ -53,7 +54,5 @@
 			}
 		}
 		tryNow();
-	}
-	// Run the filter when the page loads
-	window.addEventListener('load', redirect_to_article);
+	});
 })();
