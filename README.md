@@ -34,3 +34,6 @@ Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements 
 Adds a button to open the currently opened video in FreeTube (if installed)
 ### [zero-out-yt-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js)
 Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
+
+<sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.
+</sub>
