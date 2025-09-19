@@ -3,18 +3,17 @@
 // @name Zero Out YT Timestamp
 // @description Prompts to zero out any youtube.com timestamp upon load, might be helpful for certain situations.
 // @author Chris Lowles
-// @version 2025.9.20
+// @version 2025.9.20-1
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @match http*://www.youtube.com/*
 // ==/UserScript==
 
-let pu = '';
+let prevURL = '';
 new MutationObserver(mutations => {
-	if (location.href !== pu) {
-		pu = location.href;
+	if (location.href !== prevURL) {
+		prevURL = location.href;
 		if (
-			window.location.host == "www.youtube.com" &&
 			window.location.pathname == "/watch" &&
 			new URL(window.location.href).searchParams.get("t").replace("s", "") > 0
 		) {
