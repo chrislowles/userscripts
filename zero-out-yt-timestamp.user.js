@@ -3,22 +3,32 @@
 // @name Zero Out YT Timestamp
 // @description Prompts to zero out any youtube.com timestamp upon load, might be helpful for certain situations.
 // @author Chris Lowles
-// @version 2025.6.19
+// @version 2025.9.20
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
 // @match http*://www.youtube.com/*
 // ==/UserScript==
 
-document.addEventListener("yt-navigate-finish", function (event) {
-	console.log(event.detail.pageType, event);
-	if (event.detail.pageType == "watch" && new URL(window.location.href).searchParams.get("t").replace("s", "") > 0) {
-		if (confirm("We detected you have a timestamp in this video, do you want to clear it out and start from the beginning?") == true) {
-			let url = new URL(window.location.href);
-			let params = new URLSearchParams(url.search);
-			params.set('t', 0);
-			window.location.search = `?${params.toString()}`;
-		} else {
-			return false;
+let pu = '';
+new MutationObserver(mutations => {
+	if (location.href !== pu) {
+		pu = location.href;
+		if (
+			window.location.host == "www.youtube.com" &&
+			window.location.pathname == "/watch" &&
+			new URL(window.location.href).searchParams.get("t").replace("s", "") > 0
+		) {
+			if (confirm("We detected you have a timestamp in this video, do you want to clear it out and start from the beginning?") == true) {
+				let url = new URL(window.location.href);
+				let params = new URLSearchParams(url.search);
+				params.set('t', 0);
+				window.location.search = `?${params.toString()}`;
+			} else {
+				return false;
+			}
 		}
 	}
+}).observe(document, {
+  subtree: true,
+  childList: true
 });
