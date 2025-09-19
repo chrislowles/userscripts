@@ -3,7 +3,7 @@
 // @name Give Up Twitter/X
 // @description Redirects any twitter.com/x.com (subdomains too) url and embed to Rick Astleys smash hit.
 // @author Chris Lowles
-// @version 2025.8.07-1
+// @version 2025.9.20
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js
 // @match http*://*.x.com/*
