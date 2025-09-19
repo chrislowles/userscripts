@@ -3,7 +3,7 @@
 // @name YouTube: Subscribe w/ RSS Parrot (WIP)
 // @description Shortcut to ask RSS Parrot to create an RSS bot for YouTube channel that you can then follow, can be used as alternative for subscribing, pairs well with yt-open-w-freetube.
 // @author Chris Lowles
-// @version 2025.6.19
+// @version 2025.9.20
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-sub-w-rss-parrot.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
@@ -22,29 +22,29 @@ function setMstInst(inst) {
 }
 
 document.addEventListener("yt-navigate-finish", function (event) {
-  console.log(event.detail.pageType, event);
-  if (event.detail.pageType == "watch") {
-    waitForKeyElements("#bottom-row #owner", () => {
-      document.querySelector("#bottom-row #owner #subscribe-button").insertAdjacentHTML("afterend", `
-        <subwrss>
-          <style>
-            #bottom-row #owner #subscribe-button {display:none}
-            .subwrss a {
-              padding: 10px 12px;
-              margin-left: 8px;
-              border-radius: 17px;
-              font-size: 13.5px;
-              font-weight: bold;
-              color: white;
-              background: black;
-              text-decoration: none;
-            } .subwrss a:hover {
-              text-decoration:underline;
-            }
-          </style>
-          <a href="https://${mstInst}/share?text=@birb@rss-parrot.net ${document.querySelector("#owner [href^='/@']").href}" target="_blank">Add</a>
-        </subwrss>
-      `);
-    });
-  }
+	console.log(event.detail.pageType, event);
+	if (event.detail.pageType == "watch") {
+		waitForKeyElements("#bottom-row #owner", () => {
+			document.querySelector("#bottom-row #owner #subscribe-button").insertAdjacentHTML("afterend", `
+				<subwrss>
+					<style>
+						#bottom-row #owner #subscribe-button {display:none}
+						.subwrss a {
+							padding: 10px 12px;
+							margin-left: 8px;
+							border-radius: 17px;
+							font-size: 13.5px;
+							font-weight: bold;
+							color: white;
+							background: black;
+							text-decoration: none;
+						} .subwrss a:hover {
+							text-decoration:underline;
+						}
+					</style>
+					<a href="https://${mstInst}/share?text=@birb@rss-parrot.net ${document.querySelector("#owner [href^='/@']").href}" target="_blank">Add</a>
+				</subwrss>
+			`);
+		});
+	}
 });
