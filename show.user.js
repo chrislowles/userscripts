@@ -3,7 +3,7 @@
 // @name Random Stuff For Shows (DNI)
 // @description Random quirks to automate and run when doing our show.
 // @author Chris Lowles
-// @version 2025.8.01
+// @version 2025.9.20
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js
 // ==/UserScript==
@@ -36,25 +36,24 @@ new MutationObserver(mutations => {
 					window.location.search = `?${params.toString()}`;
 				}
 			break;
+			case "old.reddit.com":
+				document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
+			break;
 			case "www.youtube.com":
 				if (
 					window.location.pathname == "/watch" &&
-					new URL(window.location.href).searchParams.get("list") !== null &&
-					new URL(window.location.href).searchParams.get("index") !== null
+					new URL(window.location.href).searchParams.get("list") &&
+					new URL(window.location.href).searchParams.get("index")
 				) {
 					let url = new URL(window.location.href);
 					let params = new URLSearchParams(url.search);
-					params.set("list", null);
-					params.set("index", null);
-					params.set("t", 0);
+					params.set('list', null);
+					params.set('index', null);
 					window.location.search = `?${params.toString()}`;
 				}
 			break;
 			case "x.com":
 				window.location.hostname = "xcancel.com";
-			break;
-			case "old.reddit.com":
-				document.querySelector("link[rel='stylesheet'][ref='applied_subreddit_stylesheet']").remove();
 			break;
 		}
 	}
