@@ -3,7 +3,7 @@
 // @name Force Following Feed on Threads
 // @description Uses multiple methods to ensure you never have to see For You on Threads, works on Mobile and Desktop.
 // @author Chris Lowles
-// @version 2025.9.20
+// @version 2025.10.10
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js
 // @match http*://www.threads.net/*
@@ -38,6 +38,6 @@ new MutationObserver(mutations => {
 		}
 	}
 }).observe(document, {
-  subtree: true,
-  childList: true
+	subtree: true,
+	childList: true
 });
