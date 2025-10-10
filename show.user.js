@@ -3,7 +3,7 @@
 // @name Random Stuff For Shows (DNI)
 // @description Random quirks to automate and run when doing our show.
 // @author Chris Lowles
-// @version 2025.9.20
+// @version 2025.10.10
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js
 // ==/UserScript==
