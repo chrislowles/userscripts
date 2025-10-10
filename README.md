@@ -2,7 +2,7 @@
 Various userscripts, made to varying degrees of quality (Issues welcomed)
 
 ## What are userscripts?
-Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster. My preferred one is [Violentmonkey](https://violentmonkey.github.io/).
+Userscripts are extensions written to be installed in userscript managers, the benefits of userscripts as opposed to standard extensions mainly lie in the fact that fixes can be pushed way faster and hotfixes can be dropped in on local copys if need be. My preferred manager is [Violentmonkey](https://violentmonkey.github.io/), [Tampermonkey](https://www.tampermonkey.net/) is another option but in my opinion it's really long in the tooth on its featureset.
 
 ## Versioning:
 The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional patches, I don't know if this is a common format but I don't care, this is what works for me and the userscript managers don't seem to mind.
@@ -17,13 +17,13 @@ Adds a button that opens remote AP-compatible profiles in your home instance.
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ddgl-google-bing.user.js)
 Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js)
-Uses multiple methods to ensure you never have to see For You on Threads, works on Mobile and Desktop.
-### [give-up-twitter.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-twitter.user.js)
-Redirects any twitter.com/x.com (subdomains too) url to Rick Astleys smash hit.
+[LIKELY BROKEN] Uses multiple methods to ensure you never have to see For You on Threads, works on Mobile and Desktop.
+### [give-up-x.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/give-up-x.user.js)
+Redirects any x.com (subdomains too) url to Rick Astleys smash hit.
 ### [redirect-lemmy-mlmym.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-lemmy-mlmym.user.js)
-Redirects Lemmy urls to their supported mlmym instance, meant to emulate old.reddit.
+Redirects Lemmy urls to their supported mlmym instance, meant to emulate Old Reddit.
 ### [redirect-peertube-video-embed.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/redirect-peertube-video-embed.user.js)
-Redirects PeerTube videos to a fullscreen embed url that autoplays, QoL for people that sub to PeerTube channels through Mastodon or other ActivityPub-compatible platforms.
+Redirects PeerTube videos to a fullscreen embed url that autoplays, minimal QoL script for people that sub to PeerTube channels through Mastodon or other ActivityPub-compatible platforms.
 ### [unbuzzwordify-woke.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify-woke.user.js)
 Replaces specifically the word "woke" with other, more entertaining words.
 ### [unbuzzwordify.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js)
