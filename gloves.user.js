@@ -3,7 +3,7 @@
 // @name Gloves
 // @description Gloves for when you're made to read or interact with oligarch-run media.
 // @author Chris Lowles
-// @version 2025.9.20
+// @version 2025.10.10
 // @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js
 // @require https://cdn.jsdelivr.net/gh/CoeJoder/waitForKeyElements.js@v1.3/waitForKeyElements.js
