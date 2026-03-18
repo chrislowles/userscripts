@@ -3,7 +3,7 @@
 // @namespace    chrislowles.com
 // @version      2026.3.18
 // @description  Redirects posts on instances of fediverse software to fediverse.ooo.
-// @author       Chris, Claude
+// @author       Chris Lowles, Claude
 // @match        *://*/*
 // @exclude      *://fediverse.ooo/*
 // @grant        none
