@@ -2,7 +2,7 @@
 // @name         Bandcamp Auto-Close Follow/Mailing List Modal
 // @namespace    https://chrislowles.com/
 // @version      1.0
-// @description  Automatically close the follow/mailing list modal on Bandcamp when it appears.
+// @description  Automatically close the follow/mailing list modal on Bandcamp when it appears after you follow something.
 // @author       You
 // @match        https://*.bandcamp.com/*
 // @grant        none
