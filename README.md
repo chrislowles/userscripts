@@ -50,5 +50,6 @@ Automatically close the follow/mailing list modal on Bandcamp when it appears af
 ### [letterboxd-review-autoexpander.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/letterboxd-review-autoexpander.user.js)
 Automatically expands all truncated reviews on Letterboxd film and reviews pages, including "more" links.
 
-<sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.
-</sub>
+<sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.</sub>
+
+<sub>[oddsnends.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/oddsnends.user.js): random odds and ends for my day to day.</sub>
