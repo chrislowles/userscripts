@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2026.3.18
 // @description  Automatically clicks "Read more" buttons on truncated YouTube comments
-// @author       You
+// @author       Chris Lowles, Gemini
 // @match        https://www.youtube.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-autoexpand-comments.user.js
