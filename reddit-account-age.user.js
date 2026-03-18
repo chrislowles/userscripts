@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Reddit Account Age
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2026.3.18
 // @description  Displays the account age of a user next to their username in Reddit comments.
-// @author       Chris, Claude
+// @author       Chris Lowles, Claude
 // @match        https://*.reddit.com/*
 // @grant        GM_xmlhttpRequest
 // @connect      reddit.com
