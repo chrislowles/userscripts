@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://github.com/
-// @version       2.1.0
+// @version       2026.3.18
 // @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
 // @author        Chris, Claude
 // @match         *://*/*
