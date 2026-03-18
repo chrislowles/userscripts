@@ -3,7 +3,7 @@
 // @namespace     https://github.com/
 // @version       2026.3.18
 // @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
-// @author        Chris, Claude
+// @author        Chris Lowles, Claude
 // @match         *://*/*
 // @grant         GM_xmlhttpRequest
 // @grant         GM_setValue
