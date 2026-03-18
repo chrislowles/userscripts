@@ -1,9 +1,8 @@
 // ==UserScript==
 // @name         Phanpy Auto-Switch to My Instance
-// @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2026.3.18
 // @description  Automatically clicks "Switch to my instance" button in Phanpy
-// @author       Chris, Claude
+// @author       Chris Lowles, Claude
 // @match        https://phanpy.social/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/phanpy-auto-local.user.js
