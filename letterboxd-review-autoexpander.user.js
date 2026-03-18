@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2026.3.18
 // @description  Automatically expands all truncated reviews on Letterboxd film and reviews pages, including "more" links.
-// @author       Chris, Gemini
+// @author       Chris Lowles, Gemini
 // @match        https://letterboxd.com/film/*/
 // @match        https://letterboxd.com/film/*/reviews/by/activity/
 // @grant        none
