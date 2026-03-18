@@ -3,7 +3,7 @@
 // @namespace    https://chrislowles.com/
 // @version      2026.3.18
 // @description  Automatically close the follow/mailing list modal on Bandcamp when it appears after you follow something.
-// @author       Chris, Claude
+// @author       Chris Lowles, Claude
 // @match        https://*.bandcamp.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/bandcamp-autoclose-mailing-list-modal.user.js
