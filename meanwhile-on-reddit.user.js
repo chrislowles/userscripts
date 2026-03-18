@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://github.com/
-// @version       2026.3.18
+// @version       2026.3.18-1
 // @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
@@ -23,10 +23,25 @@
   const DEFAULT_LEMMY_INSTANCE  = 'lemmy.zip';
   const DEFAULT_REDLIB_INSTANCE = 'https://redlib.perennialte.ch';
   const DEFAULT_SUBREDDITS = [
-    'art', 'askreddit', 'books', 'dataisbeautiful', 'diy',
-    'explainlikeimfive', 'food', 'gaming', 'history', 'wikipedia',
-    'movies', 'music', 'news', 'worldnews', 'nottheonion',
-    'pics', 'sports', 'television', 'videos',
+    'art',
+    'askreddit',
+    'books',
+    'dataisbeautiful',
+    'diy',
+    'explainlikeimfive',
+    'food',
+    'gaming',
+    'history',
+    'wikipedia',
+    'movies',
+    'music',
+    'news',
+    'worldnews',
+    'nottheonion',
+    'pics',
+    'sports',
+    'television',
+    'videos',
   ];
 
   // ── Storage keys ─────────────────────────────────────────────────────────────
@@ -139,7 +154,7 @@
       min-width: 0;
     }
     #${WIDGET_ID} .rsw-title {
-      line-height: 1.35;
+      line-height: 1.25;
     }
     #${WIDGET_ID} .rsw-post-title-link {
       color: var(--bs-body-color, #CDD6F4);
