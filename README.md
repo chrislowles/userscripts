@@ -35,5 +35,10 @@ Adds a button to open the currently opened video in FreeTube (if installed)
 ### [zero-out-yt-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js)
 Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
 
+## Ones I've "made"
+These are automatically AI-assisted made scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping)
+### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
+Adds a sidebar widget on your Lemmy instance of choice showing a top 20 of today's Reddit among a configurable set of subreddits.
+
 <sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.
 </sub>
