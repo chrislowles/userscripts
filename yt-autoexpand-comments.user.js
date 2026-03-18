@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Auto-Expand Comments
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2026.3.18
 // @description  Automatically clicks "Read more" buttons on truncated YouTube comments
 // @author       You
 // @match        https://www.youtube.com/*
