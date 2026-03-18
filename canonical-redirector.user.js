@@ -1,16 +1,16 @@
 // ==UserScript==
-// @run-at document-start
-// @name Canonical Redirector
-// @license MIT
+// @name 		Canonical Redirector
+// @license 	MIT
 // @description Automatically redirect referral articles of supported outlets to their original source, based on MSN Redirector by Jamie Landeg-Jones.
-// @author Chris Lowles, Jamie Landeg-Jones
-// @version 2025.10.10
-// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
+// @author 		Chris Lowles, Jamie Landeg-Jones
+// @version		2026.3.18
+// @updateURL 	https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
+// @run-at 		document-start
 // @grant none
 // -- SUPPORTED SITES --
-// @match https://*.yahoo.com/*
-// @match https://www.msn.com/*
+// @match 		https://*.yahoo.com/*
+// @match 		https://www.msn.com/*
 // ==/UserScript==
 
 // Props to the hints from this post: joeytwiddle@github - https://github.com/Tampermonkey/tampermonkey/issues/1279#issuecomment-875386821
