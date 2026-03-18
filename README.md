@@ -12,8 +12,6 @@ The versioning on the userscripts is defined by year.month.day-hotfix, for examp
 Automatically redirect referral articles of supported outlets to their original source, based on MSN Redirector by Jamie Landeg-Jones.
 ### [gloves.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gloves.user.js)
 Gloves for when you're made to read or interact with oligarch-run media.
-### [ap-open-remote-profile.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ap-open-remote-profile.user.js)
-Adds a button that opens remote AP-compatible profiles in your home instance.
 ### [ddgl-google-bing.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ddgl-google-bing.user.js)
 Adds two link shortcuts to open any query made on DuckDuckGo Lite on either Google or Bing, the ebil search engines.
 ### [force-threads-feed-following.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/force-threads-feed-following.user.js)
@@ -39,6 +37,8 @@ Prompts to zero out most youtube.com timestamps on load, might be helpful for ce
 These are automatically AI-assisted made scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping)
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
 Adds a sidebar widget on your Lemmy instance of choice showing a top 20 of today's Reddit among a configurable set of subreddits.
+### [fediverse-ooo-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js)
+Redirects posts on instances of fediverse software to fediverse.ooo.
 
 <sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.
 </sub>
