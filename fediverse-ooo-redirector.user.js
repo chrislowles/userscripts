@@ -7,6 +7,8 @@
 // @match        *://*/*
 // @exclude      *://fediverse.ooo/*
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js
+// @downloadURL  https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js
 // @run-at       document-end
 // ==/UserScript==
 
