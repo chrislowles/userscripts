@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Letterboxd Review Autoexpander
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      2026.3.18
 // @description  Automatically expands all truncated reviews on Letterboxd film and reviews pages, including "more" links.
 // @author       Chris, Gemini
 // @match        https://letterboxd.com/film/*/
