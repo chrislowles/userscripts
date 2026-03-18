@@ -34,11 +34,21 @@ Adds a button to open the currently opened video in FreeTube (if installed)
 Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
 
 ## Ones I've "made"
-These are automatically AI-assisted made scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping)
+These are scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping) after messing with Claude or Gemini.
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
 Adds a sidebar widget on your Lemmy instance of choice showing a top 20 of today's Reddit among a configurable set of subreddits.
 ### [fediverse-ooo-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js)
 Redirects posts on instances of fediverse software to fediverse.ooo.
+### [reddit-account-age.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/reddit-account-age.user.js)
+Displays the account age of a user next to their username in Reddit comments.
+### [yt-autoexpand-comments.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-autoexpand-comments.user.js)
+Automatically clicks "Read more" buttons on truncated YouTube comments.
+### [gemini-link-fixer.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gemini-link-fixer.user.js)
+Monitors Gemini for links that point to Google Search queries of URLs and converts them into direct links.
+### [bandcamp-autoclose-mailing-list-modal.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/bandcamp-autoclose-mailing-list-modal.user.js)
+Automatically close the follow/mailing list modal on Bandcamp when it appears after you follow something.
+### [letterboxd-review-autoexpander.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/letterboxd-review-autoexpander.user.js)
+Automatically expands all truncated reviews on Letterboxd film and reviews pages, including "more" links.
 
 <sub>[show.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/show.user.js): random odds and ends to automate when doing my radio show.
 </sub>
