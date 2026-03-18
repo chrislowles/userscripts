@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2026.3.18
 // @description  Monitors Gemini for links that point to Google Search queries of URLs and converts them into direct links.
-// @author       You
+// @author       Chris Lowles, Gemini
 // @match        https://gemini.google.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/gemini-link-fixer.user.js
