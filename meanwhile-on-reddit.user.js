@@ -1,19 +1,19 @@
 // ==UserScript==
-// @name Meanwhile on Reddit
-// @namespace https://github.com/
-// @version 2.1.0
-// @description Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
-// @author Chris, Claude
-// @match *://*/*
-// @grant GM_xmlhttpRequest
-// @grant GM_setValue
-// @grant GM_getValue
-// @grant GM_deleteValue
-// @grant GM_registerMenuCommand
-// @connect www.reddit.com
-// @updateURL https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
-// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
-// @run-at document-idle
+// @name          Meanwhile on Reddit
+// @namespace     https://github.com/
+// @version       2.1.0
+// @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
+// @author        Chris, Claude
+// @match         *://*/*
+// @grant         GM_xmlhttpRequest
+// @grant         GM_setValue
+// @grant         GM_getValue
+// @grant         GM_deleteValue
+// @grant         GM_registerMenuCommand
+// @connect       www.reddit.com
+// @updateURL     https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
+// @downloadURL   https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
+// @run-at        document-idle
 // ==/UserScript==
 
 (function () {
