@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gemini Link Fixer
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2026.3.18
 // @description  Monitors Gemini for links that point to Google Search queries of URLs and converts them into direct links.
 // @author       You
 // @match        https://gemini.google.com/*
