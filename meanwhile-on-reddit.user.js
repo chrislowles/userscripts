@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
-// @namespace     https://github.com/
-// @version       2026.3.18-1
+// @namespace     https://chrislowles.com/
+// @version       2026.3.19
 // @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
@@ -637,11 +637,7 @@
 
     GM_registerMenuCommand('Configure Lemmy instance', () => {
       const current = getLemmyInstance();
-      const input = prompt(
-        'Enter your Lemmy instance hostname (no https://).\n\n' +
-        'Example: lemmy.world',
-        current
-      );
+      const input = prompt(`Enter your Lemmy instance hostname (no https://).\n\nExample: lemmy.world`, current);
 
       if (input === null) return;
 
@@ -657,13 +653,9 @@
         Reload the page after navigating there.`);
     });
 
-    GM_registerMenuCommand('⚙ Configure Redlib instance', () => {
+    GM_registerMenuCommand('Configure Redlib instance', () => {
       const current = getRedlibInstance();
-      const input = prompt(
-        'Enter your Redlib instance URL (with https://).\n\n' +
-        'Example: https://redlib.example.com',
-        current
-      );
+      const input = prompt(`Enter your Redlib instance URL (with https://).\n\nExample: https://redlib.example.com`, current);
 
       if (input === null) return;
 
