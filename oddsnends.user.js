@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to actually put into its own userscript.
-// @version       2026.3.26
+// @version       2026.3.26-1
 // @author        Chris Lowles
 // @run-at        document-start
 // @resource      libredirect https://raw.githubusercontent.com/libredirect/instances/refs/heads/main/data.json
@@ -52,12 +52,13 @@ function handleURLChange() {
 
     switch (window.location.href) {
         case "https://music.apple.com/us/browse":
-        case "https://music.apple.com/gb/browse":
+        case "https://music.apple.com/gb/browse": {
             window.location.href = "https://music.apple.com/au/browse";
-        break;
+        }
     }
+
     switch (window.location.host) {
-        case "codeberg.org":
+        case "codeberg.org": {
             if (window.location.pathname.substr(1).split("/")[0] == "explore") {
                 switch (window.location.pathname.substr(1).split("/")[1]) {
                     // case "repos":
@@ -66,13 +67,13 @@ function handleURLChange() {
                     // fix links to re-query current query as repo/user/org search
                 }
             }
-        break;
-        case "www.twitch.tv":
+        }
+        case "www.twitch.tv": {
             if (window.location.pathname == "/") {
                 window.location.href = "https://www.twitch.tv/directory/following";
             }
-        break;
-        case "bsky.app":
+        }
+        case "bsky.app": {
             // I'm primarily on Mastodon/GTS and follow Bluesky accounts through Bridgy middleware,
             // the stored permalink in syndicated posts leads to the official Bluesky web app post view,
             // this conditionally checks if it's that and asks if you want to view it through blueviewer.pages.dev, a thirdparty BSKY/ATProto dataviewer.
@@ -83,16 +84,16 @@ function handleURLChange() {
                 const rkey = bskyMatch[3];
                 window.location.replace(`https://blueviewer.pages.dev/view?actor=${handle}&rkey=${rkey}`)
             }
-        break;
+        }
         // Reverse image search sometimes returns multiples of the same Threads posts and Reddit threads
-        case "www.threads.com":
+        case "www.threads.com": {
             if (new URL(window.location.href).searchParams.get("hl")) {
                 let url = new URL(window.location.href);
                 let params = new URLSearchParams(url.search);
                 params.delete('hl');
                 window.location.search = `?${params.toString()}`;
             }
-        break;
+        }
         case "www.reddit.com": {
             if (new URL(window.location.href).searchParams.get("tl")) {
                 let url = new URL(window.location.href);
@@ -120,7 +121,7 @@ function handleURLChange() {
                 }
             break;
         }
-        case "lemmy.zip":
+        case "lemmy.zip": {
             if (
                 window.location.pathname.substr(1).split("/")[0] == "post" &&
                 new URL(window.location.href).searchParams.get("sort") === null
@@ -131,47 +132,47 @@ function handleURLChange() {
                 params.set('sort', "Top");
                 window.location.search = `?${params.toString()}`;
             }
-        break;
-        case "masto-fe.superseriousbusiness.org":
+        }
+        case "masto-fe.superseriousbusiness.org": {
             waitForKeyElements(".spoiler-input__input", () => {
                 setInterval(() => {
                     document.querySelector(".spoiler-input__input").setAttribute("placeholder", "(Optional) Title / CW");
                 }, 1000);
             });
-        break;
-        case "lite.duckduckgo.com":
+        }
+        case "lite.duckduckgo.com": {
             waitForKeyElements(".query", () => {
                 document.querySelector(".query").focus();
             });
-        break;
-        case "youtube-thumbnail-grabber.com":
+        }
+        case "youtube-thumbnail-grabber.com": {
             waitForKeyElements("#inputURL", () => {
                 document.querySelectorAll("#inputURL")[0].focus();
             });
-        break;
-        case "arena.ai":
+        }
+        case "arena.ai": {
             if (window.location.pathname === "/") {
                 window.location.pathname = "/text/direct";
             }
-        break;
-        case "nixos.wiki":
+        }
+        case "nixos.wiki": {
             window.location.hostname = "wiki.nixos.org";
-        break;
-        case "coomer.party":
+        }
+        case "coomer.party": {
             window.location.hostname = "coomer.su";
-        break;
-        case "kemono.party":
+        }
+        case "kemono.party": {
             window.location.hostname = "kemono.su";
-        break;
-        case "userscripts.org":
+        }
+        case "userscripts.org": {
             window.location.hostname = "userscripts-mirror.org";
-        break;
-        case "www.amazon.com":
+        }
+        case "www.amazon.com": {
             window.location.hostname = "www.amazon.com.au";
-        break;
-        case "x.com":
+        }
+        case "x.com": {
             window.location.hostname = "xcancel.com";
-        break;
+        }
     }
 }
 
