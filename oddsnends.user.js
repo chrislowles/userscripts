@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to actually put into its own userscript.
-// @version       2026.3.26-1
+// @version       2026.3.26-2
 // @author        Chris Lowles
 // @run-at        document-start
 // @resource      libredirect https://raw.githubusercontent.com/libredirect/instances/refs/heads/main/data.json
@@ -112,14 +112,13 @@ function handleURLChange() {
             }
         }
         case "www.youtube.com": {
-                const tParam = new URL(window.location.href).searchParams.get("t");
-                if (window.location.pathname == "/watch" && tParam !== null && parseInt(tParam) > 0) {
-                    let url = new URL(window.location.href);
-                    let params = new URLSearchParams(url.search);
-                    params.set('t', 0);
-                    window.location.search = `?${params.toString()}`;
-                }
-            break;
+            const tParam = new URL(window.location.href).searchParams.get("t");
+            if (window.location.pathname == "/watch" && tParam !== null && parseInt(tParam.replace("s", "")) > 0) {
+                let url = new URL(window.location.href);
+                let params = new URLSearchParams(url.search);
+                params.set('t', 0);
+                window.location.search = `?${params.toString()}`;
+            }
         }
         case "lemmy.zip": {
             if (
