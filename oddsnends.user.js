@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to actually put into its own userscript.
-// @version       2026.3.18
+// @version       2026.3.26
 // @author        Chris Lowles
 // @run-at        document-start
 // @resource      libredirect https://raw.githubusercontent.com/libredirect/instances/refs/heads/main/data.json
@@ -93,7 +93,7 @@ function handleURLChange() {
                 window.location.search = `?${params.toString()}`;
             }
         break;
-        case "www.reddit.com" {
+        case "www.reddit.com": {
             if (new URL(window.location.href).searchParams.get("tl")) {
                 let url = new URL(window.location.href);
                 let params = new URLSearchParams(url.search);
