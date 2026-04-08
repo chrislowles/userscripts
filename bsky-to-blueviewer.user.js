@@ -35,3 +35,6 @@
 
     checkAndRedirect();
 })();
+
+// Quote Repost of Bridgy Post uses this URL format, adapt this into regex too
+// https://bsky.brid.gy/convert/ap/at://did:plc:44ybard66vv44zksje25o7dz/app.bsky.feed.post/3miv2r32nns2e
