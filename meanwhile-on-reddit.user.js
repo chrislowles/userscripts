@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.3.19
-// @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits.
+// @version       2026.4.9
+// @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
 // @grant         GM_xmlhttpRequest
@@ -13,7 +13,7 @@
 // @connect       www.reddit.com
 // @updateURL     https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
 // @downloadURL   https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js
-// @run-at        document-idle
+// @run-at        document-start
 // ==/UserScript==
 
 (function () {
@@ -48,6 +48,7 @@
   const STORAGE_KEY_SUBS     = 'rss_subreddits';
   const STORAGE_KEY_INSTANCE = 'rss_lemmy_instance';
   const STORAGE_KEY_REDLIB   = 'rss_redlib_instance';
+  const STORAGE_KEY_REDIRECT = 'rss_reddit_redirect';
 
   // ── Config accessors ─────────────────────────────────────────────────────────
   function getLemmyInstance() {
@@ -61,6 +62,10 @@
       .replace(/\/$/, '');
   }
 
+  function getRedditRedirectEnabled() {
+    return GM_getValue(STORAGE_KEY_REDIRECT, true);
+  }
+
   function getSubreddits() {
     const stored = GM_getValue(STORAGE_KEY_SUBS, null);
     if (!stored) return DEFAULT_SUBREDDITS;
@@ -68,8 +73,97 @@
   }
 
   function saveSubreddits(list)    { GM_setValue(STORAGE_KEY_SUBS, list.join(','));  }
-  function saveLemmyInstance(host) { GM_setValue(STORAGE_KEY_INSTANCE, host);           }
-  function saveRedlibInstance(url) { GM_setValue(STORAGE_KEY_REDLIB, url);            }
+  function saveLemmyInstance(host) { GM_setValue(STORAGE_KEY_INSTANCE, host);        }
+  function saveRedlibInstance(url) { GM_setValue(STORAGE_KEY_REDLIB, url);           }
+
+  // ── Reddit → Redlib Redirector ────────────────────────────────────────────────
+  //
+  // Intercepts Reddit URLs and forwards them to your configured Redlib instance.
+  // Uses an allowlist of path patterns Redlib actually supports, so account/auth
+  // paths and unsupported features (polls, wikis) are left alone.
+
+  const REDDIT_DOMAINS = [
+    'www.reddit.com',
+    'reddit.com',
+    'old.reddit.com',
+    'np.reddit.com',
+    'i.reddit.com',
+  ];
+
+  // redd.it short links: redd.it/{id} — Redlib does not resolve these natively,
+  // so we skip them rather than redirecting to a broken page.
+  // const REDD_IT_DOMAIN = 'redd.it';
+
+  // Path patterns Redlib is known to handle correctly.
+  const REDLIB_ALLOWED = [
+    // Home feeds
+    /^\/?$/,
+    /^\/(top|new|hot|rising|controversial)\/?$/,
+
+    // Subreddit feeds (including multi-reddits: /r/sub1+sub2+sub3/)
+    /^\/r\/[^/]+(\/)?$/,
+    /^\/r\/[^/]+\/(top|new|hot|rising|controversial)\/?$/,
+
+    // Post / comments
+    /^\/r\/[^/]+\/comments\/[^/]+(\/.*)?$/,
+
+    // Galleries (partial Redlib support — let it handle gracefully)
+    /^\/gallery\/[^/]+\/?$/,
+
+    // User profiles
+    /^\/user\/[^/]+\/?$/,
+    /^\/u\/[^/]+\/?$/,
+    /^\/user\/[^/]+\/(posts|comments|submitted)\/?$/,
+    /^\/u\/[^/]+\/(posts|comments|submitted)\/?$/,
+
+    // Search (sitewide and per-subreddit)
+    /^\/search\/?$/,
+    /^\/r\/[^/]+\/search\/?$/,
+  ];
+
+  // Paths to explicitly exclude even if they'd otherwise match.
+  const REDLIB_EXCLUDED = [
+    /^\/poll\//,
+    /^\/r\/[^/]+\/wiki\//,
+    /^\/message\//,
+    /^\/inbox\//,
+    /^\/settings\//,
+    /^\/login\//,
+    /^\/register\//,
+    /^\/account\//,
+    /^\/notifications\//,
+    /^\/submit\//,
+    /^\/r\/[^/]+\/submit\//,
+    /^\/mod\//,
+    /^\/r\/[^/]+\/mod\//,
+    /^\/r\/[^/]+\/about\//,
+    /^\/subreddits\//,
+    /^\/r\/[^/]+\/rules\/?$/,
+  ];
+
+  function isRedditDomain() {
+    return REDDIT_DOMAINS.includes(window.location.hostname);
+  }
+
+  function isRedlibPath(pathname) {
+    if (REDLIB_EXCLUDED.some(p => p.test(pathname))) return false;
+    return REDLIB_ALLOWED.some(p => p.test(pathname));
+  }
+
+  function redirectToRedlib() {
+    if (!getRedditRedirectEnabled()) return;
+    if (!isRedditDomain()) return;
+
+    const pathname = window.location.pathname;
+    if (!isRedlibPath(pathname)) return;
+
+    const redlib = getRedlibInstance();
+
+    // Normalise /u/ aliases to /user/ since Redlib only knows /user/
+    const normPath = pathname.replace(/^\/u\//, '/user/');
+
+    window.location.replace(`${redlib}${normPath}${window.location.search}`);
+  }
 
   // ── Constants ────────────────────────────────────────────────────────────────
   const POST_COUNT   = 20;
@@ -247,10 +341,10 @@
       return {
         title:         d.title,
         sub:           d.subreddit,
-        permalinkPath: d.permalink,           // e.g. /r/sub/comments/id/slug/
+        permalinkPath: d.permalink,
         score:         d.score,
         numComments:   d.num_comments,
-        url:           d.is_self ? null : d.url, // null = text post, otherwise link target
+        url:           d.is_self ? null : d.url,
       };
     });
   }
@@ -262,13 +356,11 @@
       const cachedTime     = GM_getValue(CACHE_KEY_TIME, 0);
       const backedOffUntil = GM_getValue(CACHE_KEY_BACKOFF, 0);
 
-      // Fresh cache — serve immediately
       if (cachedData && (now - cachedTime) < CACHE_TTL_MS) {
         resolve({ posts: JSON.parse(cachedData), stale: false });
         return;
       }
 
-      // Still within a 429 backoff window
       if (now < backedOffUntil) {
         if (cachedData) {
           resolve({ posts: JSON.parse(cachedData), stale: true });
@@ -322,13 +414,12 @@
   }
 
   // ── Widget DOM ───────────────────────────────────────────────────────────────
-  function buildWidget(state /* 'loading' | 'error' | { posts, stale } */) {
+  function buildWidget(state) {
     const widget = document.createElement('div');
     widget.id = WIDGET_ID;
 
     const redlibMultiUrl = `${getRedlibInstance()}/r/${getSubreddits().join('+')}/top/?t=${TIME_FILTER}`;
 
-    // Header
     const header = document.createElement('div');
     header.className = 'rsw-header';
 
@@ -352,7 +443,6 @@
     header.appendChild(refreshBtn);
     widget.appendChild(header);
 
-    // Body
     if (state === 'loading') {
       const loading = document.createElement('div');
       loading.className = 'rsw-loading';
@@ -377,12 +467,9 @@
 
       posts.forEach(post => {
         const li = document.createElement('li');
-
         const postDiv = document.createElement('div');
         postDiv.className = 'rsw-post';
 
-        // ── Row 1: post title ────────────────────────────────────────────────
-        // Link post → links to the content URL; text/self post → plain text
         const titleEl = document.createElement('div');
         titleEl.className = 'rsw-title';
 
@@ -401,7 +488,6 @@
           titleEl.appendChild(postTitleSpan);
         }
 
-        // ── Row 2: r/subreddit - score points - comment count ────────────────
         const meta = document.createElement('div');
         meta.className = 'rsw-meta';
 
@@ -445,7 +531,6 @@
       widget.appendChild(ol);
     }
 
-    // Footer
     const footer = document.createElement('div');
     footer.className = 'rsw-footer';
     footer.innerHTML = `<a href="${redlibMultiUrl}" target="_blank" rel="noopener noreferrer">Browse on Redlib</a>`;
@@ -455,14 +540,6 @@
   }
 
   // ── Injection ────────────────────────────────────────────────────────────────
-  // Lemmy-UI sidebar selector — the right-hand col on the home/listing pages.
-  //
-  // Lemmy uses Bootstrap. The front page is a two-col Bootstrap row; the sidebar
-  // is the narrower right column. We try a ranked list of selectors and also
-  // fall back to heuristic detection (narrow col containing recognisable content).
-  //
-  // To find the correct selector for your instance, run in DevTools console:
-  //   window.__rswDebug()
   function findSidebarTarget() {
     const candidates = [
       '.col-md-4',
@@ -483,7 +560,6 @@
       }
     }
 
-    // Last-resort heuristic: find Bootstrap col elements, pick the narrow right one
     const allCols = [...document.querySelectorAll('[class]')].filter(el => {
       const cls = el.className;
       return /col-\w*-?[34]/.test(cls) && el.offsetWidth > 0;
@@ -496,7 +572,6 @@
     return null;
   }
 
-  // Debug helper — call window.__rswDebug() in DevTools to find the right selector
   window.__rswDebug = function () {
     console.group('[RSW] Sidebar selector debug');
     [...document.querySelectorAll('[class]')]
@@ -585,7 +660,6 @@
     });
   }
 
-  // ── MutationObserver fallback ────────────────────────────────────────────────
   function setupMutationFallback() {
     let moDebounce = null;
     const observer = new MutationObserver(() => {
@@ -598,7 +672,6 @@
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  // ── Wait for sidebar to exist ────────────────────────────────────────────────
   function waitForSidebar(cb, attempts = 20, interval = 300) {
     if (findSidebarTarget()) { cb(); return; }
     if (attempts <= 0) return;
@@ -648,9 +721,7 @@
       }
 
       saveLemmyInstance(hostname);
-      alert(`Lemmy instance set to: ${hostname}
-        The widget will now only inject on that domain.
-        Reload the page after navigating there.`);
+      alert(`Lemmy instance set to: ${hostname}\nThe widget will now only inject on that domain.\nReload the page after navigating there.`);
     });
 
     GM_registerMenuCommand('Configure Redlib instance', () => {
@@ -667,7 +738,6 @@
 
       saveRedlibInstance(url);
 
-      // Rebuild widget so all links update immediately
       GM_deleteValue(CACHE_KEY_DATA);
       GM_deleteValue(CACHE_KEY_TIME);
       const existing = document.getElementById(WIDGET_ID);
@@ -676,13 +746,24 @@
 
       alert(`Redlib instance set to: ${url}`);
     });
+
+    GM_registerMenuCommand('Toggle Reddit → Redlib redirect', () => {
+      const current = getRedditRedirectEnabled();
+      GM_setValue(STORAGE_KEY_REDIRECT, !current);
+      alert(`Reddit → Redlib redirect is now ${!current ? 'enabled' : 'disabled'}.`);
+    });
   }
 
   // ── Init ─────────────────────────────────────────────────────────────────────
   function init() {
-    // Always register menu commands so the user can configure the instance
-    // even before the widget is active on a new domain
     registerMenuCommands();
+
+    // Redirector runs on Reddit domains — bail out immediately after redirecting
+    // so the rest of the script (widget, Lemmy detection) never fires.
+    if (isRedditDomain()) {
+      redirectToRedlib();
+      return;
+    }
 
     if (!isOnConfiguredInstance()) return;
 
