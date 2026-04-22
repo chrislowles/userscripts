@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fediverse > Local (fediverse.ooo) Redirector
 // @namespace    chrislowles.com
-// @version      2026.3.18
+// @version      2026.4.22
 // @description  Redirects posts on instances of fediverse software to fediverse.ooo.
 // @author       Chris Lowles, Claude
 // @match        *://*/*
@@ -71,8 +71,10 @@
         if (currentHostname === SERVICE_DOMAIN) return;
 
         const newUrl = constructRedirectUrl(currentUrl);
-        console.log(`[FediRedirect] Redirecting to ${newUrl}`);
-        window.location.replace(newUrl);
+        console.log(`[FediRedirect] Prompting to redirect to ${newUrl}`);
+        if (confirm("Fediverse software detected, open in local instance through fediverse.ooo?") === true) {
+            window.location.replace(newUrl);
+        }
     }
 
 })();
