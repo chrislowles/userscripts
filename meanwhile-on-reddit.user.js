@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.4.29
+// @version       2026.4.29-1
 // @description   Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
@@ -561,7 +561,6 @@
 
   // ── Injection ────────────────────────────────────────────────────────────────
 
-  // Find the nav/header element to insert after
   function findNavTarget() {
     const candidates = [
       'nav.navbar',
@@ -616,6 +615,36 @@
       });
   }
 
+  // ── Nav wait helper ───────────────────────────────────────────────────────────
+  // Uses a MutationObserver for the initial wait, falls back to polling.
+  // Self-cleans once the nav is found or the timeout expires.
+  function waitForNav(cb, timeoutMs = 10000) {
+    if (findNavTarget()) { cb(); return; }
+
+    let done = false;
+    let timer = null;
+
+    const observer = new MutationObserver(() => {
+      if (done) return;
+      if (findNavTarget()) {
+        done = true;
+        clearTimeout(timer);
+        observer.disconnect();
+        cb();
+      }
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Hard timeout so we don't leak observers on pages where nav never appears.
+    timer = setTimeout(() => {
+      if (!done) {
+        done = true;
+        observer.disconnect();
+      }
+    }, timeoutMs);
+  }
+
   // ── SPA nav detection ────────────────────────────────────────────────────────
   function interceptHistoryMethod(method) {
     const original = history[method];
@@ -643,27 +672,45 @@
           return;
         }
         if (!document.getElementById(WIDGET_ID)) {
+          // Use waitForNav so we retry if the SPA nav hasn't re-rendered the
+          // header yet by the time the debounce fires.
           waitForNav(injectWidget);
         }
-      }, 300);
+      }, 500);
     });
   }
 
+  // ── Mutation fallback ────────────────────────────────────────────────────────
+  // Catches cases where the initial waitForNav fired before the SPA did a
+  // second render pass that wiped the widget. Calls waitForNav (not injectWidget
+  // directly) so we don't bail silently if the nav isn't stable yet.
   function setupMutationFallback() {
     let moDebounce = null;
     const observer = new MutationObserver(() => {
       if (!isOnFrontPage()) return;
       if (document.getElementById(WIDGET_ID)) return;
       clearTimeout(moDebounce);
-      moDebounce = setTimeout(injectWidget, 500);
+      moDebounce = setTimeout(() => {
+        if (!isOnFrontPage()) return;
+        if (!document.getElementById(WIDGET_ID)) {
+          waitForNav(injectWidget);
+        }
+      }, 1000);
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  function waitForNav(cb, attempts = 20, interval = 300) {
-    if (findNavTarget()) { cb(); return; }
-    if (attempts <= 0) return;
-    setTimeout(() => waitForNav(cb, attempts - 1, interval), interval);
+  // ── Safety-net interval ───────────────────────────────────────────────────────
+  // Last resort: if both the nav listener and mutation fallback miss, this will
+  // catch the gap within a few seconds.
+  function setupSafetyNet() {
+    setInterval(() => {
+      if (!isOnFrontPage()) return;
+      if (!isOnConfiguredInstance()) return;
+      if (document.getElementById(WIDGET_ID)) return;
+      if (!findNavTarget()) return;
+      injectWidget();
+    }, 5000);
   }
 
   // ── Menu commands ────────────────────────────────────────────────────────────
@@ -745,6 +792,7 @@
     injectStyles();
     setupNavListener();
     setupMutationFallback();
+    setupSafetyNet();
     waitForNav(injectWidget);
   }
 
