@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.4.9
-// @description   Injects a sidebar widget on your Lemmy instance showing today's top Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
+// @version       2026.4.29
+// @description   Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
 // @grant         GM_xmlhttpRequest
@@ -77,11 +77,6 @@
   function saveRedlibInstance(url) { GM_setValue(STORAGE_KEY_REDLIB, url);           }
 
   // ── Reddit → Redlib Redirector ────────────────────────────────────────────────
-  //
-  // Intercepts Reddit URLs and forwards them to your configured Redlib instance.
-  // Uses an allowlist of path patterns Redlib actually supports, so account/auth
-  // paths and unsupported features (polls, wikis) are left alone.
-
   const REDDIT_DOMAINS = [
     'www.reddit.com',
     'reddit.com',
@@ -90,38 +85,21 @@
     'i.reddit.com',
   ];
 
-  // redd.it short links: redd.it/{id} — Redlib does not resolve these natively,
-  // so we skip them rather than redirecting to a broken page.
-  // const REDD_IT_DOMAIN = 'redd.it';
-
-  // Path patterns Redlib is known to handle correctly.
   const REDLIB_ALLOWED = [
-    // Home feeds
     /^\/?$/,
     /^\/(top|new|hot|rising|controversial)\/?$/,
-
-    // Subreddit feeds (including multi-reddits: /r/sub1+sub2+sub3/)
     /^\/r\/[^/]+(\/)?$/,
     /^\/r\/[^/]+\/(top|new|hot|rising|controversial)\/?$/,
-
-    // Post / comments
     /^\/r\/[^/]+\/comments\/[^/]+(\/.*)?$/,
-
-    // Galleries (partial Redlib support — let it handle gracefully)
     /^\/gallery\/[^/]+\/?$/,
-
-    // User profiles
     /^\/user\/[^/]+\/?$/,
     /^\/u\/[^/]+\/?$/,
     /^\/user\/[^/]+\/(posts|comments|submitted)\/?$/,
     /^\/u\/[^/]+\/(posts|comments|submitted)\/?$/,
-
-    // Search (sitewide and per-subreddit)
     /^\/search\/?$/,
     /^\/r\/[^/]+\/search\/?$/,
   ];
 
-  // Paths to explicitly exclude even if they'd otherwise match.
   const REDLIB_EXCLUDED = [
     /^\/poll\//,
     /^\/r\/[^/]+\/wiki\//,
@@ -153,20 +131,15 @@
   function redirectToRedlib() {
     if (!getRedditRedirectEnabled()) return;
     if (!isRedditDomain()) return;
-
     const pathname = window.location.pathname;
     if (!isRedlibPath(pathname)) return;
-
     const redlib = getRedlibInstance();
-
-    // Normalise /u/ aliases to /user/ since Redlib only knows /user/
     const normPath = pathname.replace(/^\/u\//, '/user/');
-
     window.location.replace(`${redlib}${normPath}${window.location.search}`);
   }
 
   // ── Constants ────────────────────────────────────────────────────────────────
-  const POST_COUNT   = 20;
+  const POST_COUNT   = 3;
   const TIME_FILTER  = 'day';
   const CACHE_TTL_MS = 60 * 60 * 1000;
   const BACKOFF_MS   = 60 * 60 * 1000;
@@ -192,131 +165,168 @@
   // ── Styles ───────────────────────────────────────────────────────────────────
   const CSS = `
     #${WIDGET_ID} {
-      margin-bottom: 1rem;
-      border-radius: 0.5rem;
-      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
       background: var(--bs-card-bg, #1E1E2E);
-      border: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
-      font-size: 0.95rem;
-    }
-    #${WIDGET_ID} .rsw-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.55rem 0.75rem;
-      background: var(--bs-card-cap-bg, rgba(255, 255, 255, 0.05));
       border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
-      font-weight: 600;
-      color: var(--bs-body-color, #CDD6F4);
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
+      font-size: 0.82rem;
+      font-family: inherit;
+      z-index: 900;
     }
-    #${WIDGET_ID} .rsw-header-left {
+    #${WIDGET_ID} .rsw-inner {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+    #${WIDGET_ID} .rsw-label {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      padding: 0 0.75rem;
+      white-space: nowrap;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bs-secondary, #888);
+      border-right: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
+      background: var(--bs-card-cap-bg, rgba(255, 255, 255, 0.04));
+      gap: 0.4rem;
+    }
+    #${WIDGET_ID} .rsw-label a {
+      color: inherit;
+      text-decoration: none;
+    }
+    #${WIDGET_ID} .rsw-label a:hover {
+      color: #FF4500;
     }
     #${WIDGET_ID} .rsw-refresh {
       background: none;
       border: none;
       cursor: pointer;
       color: var(--bs-secondary, #888);
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       padding: 0;
       line-height: 1;
+      font-family: inherit;
     }
     #${WIDGET_ID} .rsw-refresh:hover {
       color: var(--bs-body-color, #CDD6F4);
     }
-    #${WIDGET_ID} ol {
-      margin: 0;
-      padding: 0 0 0.4rem;
-      list-style: none;
-    }
-    #${WIDGET_ID} li {
-      padding: 0.45rem 0.75rem;
-      border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.05));
-    }
-    #${WIDGET_ID} li:last-child {
-      border-bottom: none;
+    #${WIDGET_ID} .rsw-posts {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+      min-width: 0;
     }
     #${WIDGET_ID} .rsw-post {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      justify-content: center;
+      flex: 1 1 0;
+      min-width: 180px;
+      padding: 0.5rem 0.75rem;
+      border-right: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.07));
       min-width: 0;
+      gap: 0.15rem;
     }
-    #${WIDGET_ID} .rsw-title {
-      line-height: 1.25;
+    #${WIDGET_ID} .rsw-post:last-child {
+      border-right: none;
+    }
+    #${WIDGET_ID} .rsw-post-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
     }
     #${WIDGET_ID} .rsw-post-title-link {
       color: var(--bs-body-color, #CDD6F4);
       text-decoration: none;
     }
     #${WIDGET_ID} .rsw-post-title-link:hover {
-      text-decoration: underline;
       color: #FF4500;
-    }
-    #${WIDGET_ID} .rsw-post-title-text {
-      color: var(--bs-body-color, #CDD6F4);
+      text-decoration: underline;
     }
     #${WIDGET_ID} .rsw-meta {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--bs-secondary, #888);
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
+      gap: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
     }
     #${WIDGET_ID} .rsw-sub-link {
       color: #FF6534;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      flex-shrink: 0;
     }
     #${WIDGET_ID} .rsw-sub-link:hover {
       text-decoration: underline;
     }
-    #${WIDGET_ID} .rsw-meta-sep {
-      margin: 0 0.3em;
-      opacity: 0.5;
+    #${WIDGET_ID} .rsw-sep {
+      opacity: 0.4;
+      flex-shrink: 0;
     }
     #${WIDGET_ID} .rsw-comments-link {
       color: inherit;
       text-decoration: none;
+      flex-shrink: 0;
     }
     #${WIDGET_ID} .rsw-comments-link:hover {
       color: #FF4500;
       text-decoration: underline;
     }
-    #${WIDGET_ID} .rsw-stale {
-      padding: 0.35rem 0.75rem;
-      font-size: 0.68rem;
-      color: #f9e2af;
-      background: rgba(249, 226, 175, 0.08);
-      border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.05));
+    #${WIDGET_ID} .rsw-score {
+      flex-shrink: 0;
     }
-    #${WIDGET_ID} .rsw-loading, #${WIDGET_ID} .rsw-error {
-      padding: 0.75rem;
+    #${WIDGET_ID} .rsw-status {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
       color: var(--bs-secondary, #888);
-      text-align: center;
       font-style: italic;
+      font-size: 0.78rem;
     }
-    #${WIDGET_ID} .rsw-error {
+    #${WIDGET_ID} .rsw-status.error {
       color: #F38BA8;
     }
-    #${WIDGET_ID} .rsw-footer {
-      padding: 0.35rem 0.75rem;
-      text-align: right;
-      border-top: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.05));
-      color: var(--bs-secondary, #888);
+    #${WIDGET_ID} .rsw-stale {
+      display: flex;
+      align-items: center;
+      padding: 0 0.5rem;
       font-size: 0.65rem;
+      color: #f9e2af;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
-    #${WIDGET_ID} .rsw-footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-    #${WIDGET_ID} .rsw-footer a:hover {
-      text-decoration: underline;
+
+    @media (max-width: 600px) {
+      #${WIDGET_ID} .rsw-label {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
+        padding: 0.35rem 0.75rem;
+      }
+      #${WIDGET_ID} .rsw-posts {
+        flex-direction: column;
+        width: 100%;
+      }
+      #${WIDGET_ID} .rsw-post {
+        border-right: none;
+        border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.07));
+        flex: none;
+        min-width: unset;
+      }
+      #${WIDGET_ID} .rsw-post:last-child {
+        border-bottom: none;
+      }
+      #${WIDGET_ID} .rsw-post-title {
+        white-space: normal;
+      }
     }
   `;
 
@@ -420,17 +430,24 @@
 
     const redlibMultiUrl = `${getRedlibInstance()}/r/${getSubreddits().join('+')}/top/?t=${TIME_FILTER}`;
 
-    const header = document.createElement('div');
-    header.className = 'rsw-header';
+    const inner = document.createElement('div');
+    inner.className = 'rsw-inner';
 
-    const headerLeft = document.createElement('span');
-    headerLeft.className = 'rsw-header-left';
-    headerLeft.textContent = 'Meanwhile on Reddit';
+    // Label / header cell
+    const label = document.createElement('div');
+    label.className = 'rsw-label';
+
+    const labelLink = document.createElement('a');
+    labelLink.href = redlibMultiUrl;
+    labelLink.target = '_blank';
+    labelLink.rel = 'noopener noreferrer';
+    labelLink.textContent = 'Meanwhile on Reddit';
+    label.appendChild(labelLink);
 
     const refreshBtn = document.createElement('button');
     refreshBtn.className = 'rsw-refresh';
     refreshBtn.title = 'Force refresh';
-    refreshBtn.textContent = 'Refresh';
+    refreshBtn.textContent = '↻';
     refreshBtn.addEventListener('click', () => {
       GM_setValue(CACHE_KEY_TIME, 0);
       GM_deleteValue(CACHE_KEY_BACKOFF);
@@ -438,56 +455,63 @@
       if (existing) existing.replaceWith(buildWidget('loading'));
       fetchAndRender();
     });
+    label.appendChild(refreshBtn);
 
-    header.appendChild(headerLeft);
-    header.appendChild(refreshBtn);
-    widget.appendChild(header);
+    inner.appendChild(label);
 
     if (state === 'loading') {
-      const loading = document.createElement('div');
-      loading.className = 'rsw-loading';
-      loading.textContent = 'Fetching posts…';
-      widget.appendChild(loading);
-    } else if (state === 'error' || typeof state === 'string') {
-      const err = document.createElement('div');
-      err.className = 'rsw-error';
-      err.textContent = 'Could not load posts. Reddit may be unavailable.';
-      widget.appendChild(err);
+      const status = document.createElement('div');
+      status.className = 'rsw-status';
+      status.textContent = 'Fetching posts…';
+      inner.appendChild(status);
+    } else if (state === 'error') {
+      const status = document.createElement('div');
+      status.className = 'rsw-status error';
+      status.textContent = 'Could not load — Reddit may be unavailable.';
+      inner.appendChild(status);
     } else {
       const { posts, stale } = state;
 
       if (stale) {
         const notice = document.createElement('div');
         notice.className = 'rsw-stale';
-        notice.textContent = '!!! Showing cached posts — Reddit rate limit active';
-        widget.appendChild(notice);
+        notice.textContent = '⚠ Cached';
+        notice.title = 'Showing cached posts — Reddit rate limit active';
+        inner.appendChild(notice);
       }
 
-      const ol = document.createElement('ol');
+      const postsEl = document.createElement('div');
+      postsEl.className = 'rsw-posts';
 
       posts.forEach(post => {
-        const li = document.createElement('li');
-        const postDiv = document.createElement('div');
-        postDiv.className = 'rsw-post';
+        const postEl = document.createElement('div');
+        postEl.className = 'rsw-post';
 
+        // Title row
         const titleEl = document.createElement('div');
-        titleEl.className = 'rsw-title';
+        titleEl.className = 'rsw-post-title';
 
         if (post.url) {
-          const postTitleLink = document.createElement('a');
-          postTitleLink.className = 'rsw-post-title-link';
-          postTitleLink.href = post.url;
-          postTitleLink.target = '_blank';
-          postTitleLink.rel = 'noopener noreferrer';
-          postTitleLink.textContent = post.title;
-          titleEl.appendChild(postTitleLink);
+          const link = document.createElement('a');
+          link.className = 'rsw-post-title-link';
+          link.href = post.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = post.title;
+          link.title = post.title;
+          titleEl.appendChild(link);
         } else {
-          const postTitleSpan = document.createElement('span');
-          postTitleSpan.className = 'rsw-post-title-text';
-          postTitleSpan.textContent = post.title;
-          titleEl.appendChild(postTitleSpan);
+          const commentsLink = document.createElement('a');
+          commentsLink.className = 'rsw-post-title-link';
+          commentsLink.href = redlibPostUrl(post);
+          commentsLink.target = '_blank';
+          commentsLink.rel = 'noopener noreferrer';
+          commentsLink.textContent = post.title;
+          commentsLink.title = post.title;
+          titleEl.appendChild(commentsLink);
         }
 
+        // Meta row
         const meta = document.createElement('div');
         meta.className = 'rsw-meta';
 
@@ -499,15 +523,16 @@
         subLink.textContent = `r/${post.sub}`;
 
         const sep1 = document.createElement('span');
-        sep1.className = 'rsw-meta-sep';
-        sep1.textContent = '-';
+        sep1.className = 'rsw-sep';
+        sep1.textContent = '·';
 
-        const scoreSpan = document.createElement('span');
-        scoreSpan.textContent = `${formatNum(post.score)} points`;
+        const score = document.createElement('span');
+        score.className = 'rsw-score';
+        score.textContent = `${formatNum(post.score)} pts`;
 
         const sep2 = document.createElement('span');
-        sep2.className = 'rsw-meta-sep';
-        sep2.textContent = '-';
+        sep2.className = 'rsw-sep';
+        sep2.textContent = '·';
 
         const commentsLink = document.createElement('a');
         commentsLink.className = 'rsw-comments-link';
@@ -518,75 +543,39 @@
 
         meta.appendChild(subLink);
         meta.appendChild(sep1);
-        meta.appendChild(scoreSpan);
+        meta.appendChild(score);
         meta.appendChild(sep2);
         meta.appendChild(commentsLink);
 
-        postDiv.appendChild(titleEl);
-        postDiv.appendChild(meta);
-        li.appendChild(postDiv);
-        ol.appendChild(li);
+        postEl.appendChild(titleEl);
+        postEl.appendChild(meta);
+        postsEl.appendChild(postEl);
       });
 
-      widget.appendChild(ol);
+      inner.appendChild(postsEl);
     }
 
-    const footer = document.createElement('div');
-    footer.className = 'rsw-footer';
-    footer.innerHTML = `<a href="${redlibMultiUrl}" target="_blank" rel="noopener noreferrer">Browse on Redlib</a>`;
-    widget.appendChild(footer);
-
+    widget.appendChild(inner);
     return widget;
   }
 
   // ── Injection ────────────────────────────────────────────────────────────────
-  function findSidebarTarget() {
-    const candidates = [
-      '.col-md-4',
-      '.container-lg .col-md-4',
-      '.container .col-md-4',
-      'aside',
-      '.site-sidebar',
-      '.sidebar-col',
-      'div[class*="col-md-4"]',
-      'div[class*="col-lg-4"]',
-      'div[class*="col-sm-4"]',
-    ];
 
+  // Find the nav/header element to insert after
+  function findNavTarget() {
+    const candidates = [
+      'nav.navbar',
+      'nav',
+      'header',
+      '.site-header',
+      '#navbar',
+    ];
     for (const sel of candidates) {
       const el = document.querySelector(sel);
-      if (el && el.offsetWidth > 0 && el.offsetWidth < window.innerWidth * 0.5) {
-        return el;
-      }
+      if (el) return el;
     }
-
-    const allCols = [...document.querySelectorAll('[class]')].filter(el => {
-      const cls = el.className;
-      return /col-\w*-?[34]/.test(cls) && el.offsetWidth > 0;
-    });
-    if (allCols.length) {
-      allCols.sort((a, b) => b.getBoundingClientRect().left - a.getBoundingClientRect().left);
-      return allCols[0];
-    }
-
     return null;
   }
-
-  window.__rswDebug = function () {
-    console.group('[RSW] Sidebar selector debug');
-    [...document.querySelectorAll('[class]')]
-      .filter(el => {
-        const w = el.offsetWidth;
-        return w > 0 && w < window.innerWidth * 0.5 && el.children.length > 0;
-      })
-      .slice(0, 20)
-      .forEach(el => {
-        const r = el.getBoundingClientRect();
-        console.log(`x:${Math.round(r.left)} w:${Math.round(r.width)}`, el.tagName, `"${el.className}"`, el);
-      });
-    console.log('findSidebarTarget() returned:', findSidebarTarget());
-    console.groupEnd();
-  };
 
   function isOnFrontPage() {
     const path = window.location.pathname;
@@ -601,11 +590,11 @@
     if (!isOnFrontPage()) return;
     if (document.getElementById(WIDGET_ID)) return;
 
-    const target = findSidebarTarget();
-    if (!target) return;
+    const nav = findNavTarget();
+    if (!nav) return;
 
     const placeholder = buildWidget('loading');
-    target.prepend(placeholder);
+    nav.insertAdjacentElement('afterend', placeholder);
 
     fetchAndRender();
   }
@@ -617,8 +606,8 @@
         if (existing) {
           existing.replaceWith(buildWidget(result));
         } else {
-          const target = findSidebarTarget();
-          if (target) target.prepend(buildWidget(result));
+          const nav = findNavTarget();
+          if (nav) nav.insertAdjacentElement('afterend', buildWidget(result));
         }
       })
       .catch(() => {
@@ -654,7 +643,7 @@
           return;
         }
         if (!document.getElementById(WIDGET_ID)) {
-          waitForSidebar(injectWidget);
+          waitForNav(injectWidget);
         }
       }, 300);
     });
@@ -668,82 +657,70 @@
       clearTimeout(moDebounce);
       moDebounce = setTimeout(injectWidget, 500);
     });
-
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  function waitForSidebar(cb, attempts = 20, interval = 300) {
-    if (findSidebarTarget()) { cb(); return; }
+  function waitForNav(cb, attempts = 20, interval = 300) {
+    if (findNavTarget()) { cb(); return; }
     if (attempts <= 0) return;
-    setTimeout(() => waitForSidebar(cb, attempts - 1, interval), interval);
+    setTimeout(() => waitForNav(cb, attempts - 1, interval), interval);
   }
 
   // ── Menu commands ────────────────────────────────────────────────────────────
   function registerMenuCommands() {
     GM_registerMenuCommand('Configure subreddits', () => {
       const current = getSubreddits().join(', ');
-      const input = prompt(`Enter subreddits as a comma-separated list. You can include or omit the r/ prefix — both work.\n\nExample: linux, selfhosted, homelab`, current);
-
+      const input = prompt(
+        `Enter subreddits as a comma-separated list. r/ prefix optional.\n\nExample: linux, selfhosted, homelab`,
+        current
+      );
       if (input === null) return;
-
       const parsed = input
         .split(',')
         .map(s => s.trim().replace(/^r\//i, ''))
         .filter(Boolean);
-
       if (parsed.length === 0) {
         alert('No valid subreddits entered — keeping existing list.');
         return;
       }
-
       saveSubreddits(parsed);
       GM_deleteValue(CACHE_KEY_DATA);
       GM_deleteValue(CACHE_KEY_TIME);
       GM_deleteValue(CACHE_KEY_BACKOFF);
-
       const existing = document.getElementById(WIDGET_ID);
       if (existing) existing.replaceWith(buildWidget('loading'));
       fetchAndRender();
-
       alert(`Saved! Now tracking: ${parsed.map(s => 'r/' + s).join(', ')}`);
     });
 
     GM_registerMenuCommand('Configure Lemmy instance', () => {
       const current = getLemmyInstance();
-      const input = prompt(`Enter your Lemmy instance hostname (no https://).\n\nExample: lemmy.world`, current);
-
+      const input = prompt(
+        `Enter your Lemmy instance hostname (no https://).\n\nExample: lemmy.world`,
+        current
+      );
       if (input === null) return;
-
       const hostname = input.trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
-      if (!hostname) {
-        alert('No hostname entered — keeping existing.');
-        return;
-      }
-
+      if (!hostname) { alert('No hostname entered — keeping existing.'); return; }
       saveLemmyInstance(hostname);
-      alert(`Lemmy instance set to: ${hostname}\nThe widget will now only inject on that domain.\nReload the page after navigating there.`);
+      alert(`Lemmy instance set to: ${hostname}\nReload the page after navigating there.`);
     });
 
     GM_registerMenuCommand('Configure Redlib instance', () => {
       const current = getRedlibInstance();
-      const input = prompt(`Enter your Redlib instance URL (with https://).\n\nExample: https://redlib.example.com`, current);
-
+      const input = prompt(
+        `Enter your Redlib instance URL (with https://).\n\nExample: https://redlib.example.com`,
+        current
+      );
       if (input === null) return;
-
       const url = input.trim().replace(/\/$/, '');
-      if (!url) {
-        alert('No URL entered — keeping existing.');
-        return;
-      }
-
+      if (!url) { alert('No URL entered — keeping existing.'); return; }
       saveRedlibInstance(url);
-
       GM_deleteValue(CACHE_KEY_DATA);
       GM_deleteValue(CACHE_KEY_TIME);
       const existing = document.getElementById(WIDGET_ID);
       if (existing) existing.replaceWith(buildWidget('loading'));
       fetchAndRender();
-
       alert(`Redlib instance set to: ${url}`);
     });
 
@@ -758,8 +735,6 @@
   function init() {
     registerMenuCommands();
 
-    // Redirector runs on Reddit domains — bail out immediately after redirecting
-    // so the rest of the script (widget, Lemmy detection) never fires.
     if (isRedditDomain()) {
       redirectToRedlib();
       return;
@@ -770,7 +745,7 @@
     injectStyles();
     setupNavListener();
     setupMutationFallback();
-    waitForSidebar(injectWidget);
+    waitForNav(injectWidget);
   }
 
   init();
