@@ -35,6 +35,8 @@ Prompts to zero out most youtube.com timestamps on load, might be helpful for ce
 
 ## Ones I've "made"
 These are scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping) after messing with Claude or Gemini.
+### [skipper.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/skipper.user.js)
+Marks various sections on YouTube's progress bar using the SponsorBlock API. Press a configurable key to skip the current segment manually.
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
 Adds a sidebar widget on your Lemmy instance of choice showing a top 20 of today's Reddit among a configurable set of subreddits.
 ### [fediverse-ooo-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js)
