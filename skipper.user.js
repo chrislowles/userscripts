@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Skipper
 // @description  Marks various sections on YouTube's progress bar using the SponsorBlock API. Press a configurable key to skip the current segment manually.
-// @version      2026.4.30
-// @author       Chris, Claude
+// @version      2026.5.2
+// @author       Chris Lowles, Claude
 // @license      AGPL-3.0-or-later
 // @namespace    https://greasyfork.org/
 // @match        *://www.youtube.com/*
@@ -71,7 +71,7 @@
     disable_hashing: false,
   };
 
-  const SCRIPT_KEY = "mss_cfg";
+  const SCRIPT_KEY = "skipper_cfg";
   const PLR_SELECTOR = "#movie_player video, video#player_html5_api, video#player";
 
   // ── Load & merge settings ───────────────────────────────────────────────────
@@ -80,7 +80,7 @@
   if (!cfg || typeof cfg !== "object" || !Array.isArray(cfg.categories)) {
     cfg = { ...DEFAULTS };
     await GM.setValue(SCRIPT_KEY, cfg);
-    console.log("[MSS] Default settings saved.");
+    console.log("[SKIPPER] Default settings saved.");
   } else {
     // Merge saved settings with defaults so new keys are always present
     cfg = { ...DEFAULTS, ...cfg };
@@ -129,10 +129,10 @@
     } else {
       const hash = await sha256(videoId);
       url = `https://${inst}/api/skipSegments/${hash.slice(0, 4)}?categories=${cat}`;
-      console.log(`[MSS] Hash prefix: ${hash.slice(0, 4)}`);
+      console.log(`[SKIPPER] Hash prefix: ${hash.slice(0, 4)}`);
     }
 
-    console.log("[MSS] API →", url);
+    console.log("[SKIPPER] API >", url);
 
     return new Promise(resolve => {
       GM.xmlHttpRequest({
@@ -184,7 +184,7 @@
       "#movie_player .ytp-progress-bar-container, .html5-video-player .ytp-progress-bar-container"
     );
     if (!progressBarContainer) {
-      console.warn("[MSS] Progress bar container not found; markers not injected.");
+      console.warn("[SKIPPER] Progress bar container not found; markers not injected.");
       return;
     }
 
@@ -194,7 +194,7 @@
     }
 
     markerContainer = document.createElement("div");
-    markerContainer.id = "mss-markers";
+    markerContainer.id = "skipper-markers";
     Object.assign(markerContainer.style, {
       position: "absolute",
       top: "0",
@@ -212,7 +212,7 @@
       const pct = (v) => `${(v / duration) * 100}%`;
 
       const marker = document.createElement("div");
-      marker.title = `${meta.label}\n${fmtTime(start)} → ${fmtTime(end)}\nPress ${cfg.skipKey.toUpperCase()} to skip`;
+      marker.title = `${meta.label}\n${fmtTime(start)} > ${fmtTime(end)}\nPress ${cfg.skipKey.toUpperCase()} to skip`;
       Object.assign(marker.style, {
         position: "absolute",
         left: pct(start),
@@ -227,7 +227,7 @@
     }
 
     progressBarContainer.appendChild(markerContainer);
-    console.log(`[MSS] Injected ${segments.length} marker(s).`);
+    console.log(`[SKIPPER] Injected ${segments.length} marker(s).`);
   }
 
   // ── Skip banner ─────────────────────────────────────────────────────────────
@@ -239,7 +239,7 @@
     if (!playerEl) return null;
 
     bannerEl = document.createElement("div");
-    bannerEl.id = "mss-banner";
+    bannerEl.id = "skipper-banner";
     Object.assign(bannerEl.style, {
       position: "absolute",
       bottom: "72px",
@@ -270,7 +270,7 @@
     if (!b) return;
     const meta = CATEGORY_META[seg.category] || { color: "#AAA", label: seg.category };
     b.style.borderLeftColor = meta.color;
-    b.textContent = `⏭ ${meta.label} — press ${cfg.skipKey.toUpperCase()} to skip`;
+    b.textContent = `${meta.label}: press ${cfg.skipKey.toUpperCase()} to skip`;
     b.style.display = "block";
     // Trigger transition after paint
     requestAnimationFrame(() => { b.style.opacity = "1"; });
@@ -318,8 +318,8 @@
       if (currentSegIdx >= 0 && player) {
         const seg = segments[currentSegIdx];
         console.log(
-          `[MSS] Manual skip: ${seg.category} ` +
-          `(${fmtTime(seg.segment[0])} → ${fmtTime(seg.segment[1])})`
+          `[SKIPPER] Skip: ${seg.category} ` +
+          `(${fmtTime(seg.segment[0])} > ${fmtTime(seg.segment[1])})`
         );
         player.currentTime = seg.segment[1];
         currentSegIdx = -1;
@@ -342,7 +342,7 @@
     if (videoId === activeVideoId) return;
     activeVideoId = videoId;
 
-    console.log(`[MSS] Video changed: ${videoId}`);
+    console.log(`[SKIPPER] Video changed: ${videoId}`);
     cleanup();
 
     // Wait for the <video> element to be present and have readyState >= 1
@@ -357,7 +357,7 @@
     player.addEventListener("timeupdate", onTimeUpdate);
 
     segments = await fetchSegments(videoId);
-    console.log(`[MSS] ${segments.length} segment(s) loaded for ${videoId}.`);
+    console.log(`[SKIPPER] ${segments.length} segment(s) loaded for ${videoId}.`);
     if (!segments.length) return;
 
     // Inject markers; if duration isn't known yet wait for loadedmetadata
@@ -374,7 +374,7 @@
     );
     if (progressBarArea) {
       new MutationObserver(() => {
-        if (!document.getElementById("mss-markers")) {
+        if (!document.getElementById("skipper-markers")) {
           injectMarkers();
         }
       }).observe(progressBarArea, { childList: true, subtree: true });
@@ -407,7 +407,7 @@
   // ── Userscript manager menu ─────────────────────────────────────────────────
 
   if (typeof GM.registerMenuCommand !== "undefined") {
-    GM.registerMenuCommand("Manual Sponsor Skipper — Settings", () => {
+    GM.registerMenuCommand("Settings", () => {
       // Skip key
       const newKey = window.prompt(
         "Skip key (single character):\nCurrent: " + cfg.skipKey.toUpperCase(),
@@ -423,7 +423,7 @@
 
       // Minimum upvotes
       const newUpvotes = window.prompt(
-        "Minimum SponsorBlock vote threshold (default −2):\nCurrent: " + cfg.upvotes,
+        "Minimum SponsorBlock vote threshold (default -2):\nCurrent: " + cfg.upvotes,
         String(cfg.upvotes)
       );
       if (newUpvotes !== null) {
