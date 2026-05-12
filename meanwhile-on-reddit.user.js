@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.4.29-1
+// @version       2026.5.12
 // @description   Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
@@ -227,7 +227,6 @@
       min-width: 180px;
       padding: 0.5rem 0.75rem;
       border-right: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.07));
-      min-width: 0;
       gap: 0.15rem;
     }
     #${WIDGET_ID} .rsw-post:last-child {
@@ -335,7 +334,7 @@
     const style = document.createElement('style');
     style.id = 'rsw-styles';
     style.textContent = CSS;
-    document.head.appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
   }
 
   // ── Reddit fetch ─────────────────────────────────────────────────────────────
@@ -697,7 +696,7 @@
         }
       }, 1000);
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
   // ── Safety-net interval ───────────────────────────────────────────────────────
