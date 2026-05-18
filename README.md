@@ -26,8 +26,6 @@ Replaces specifically the word "woke" with other, more entertaining words.
 Replaces certain buzzwords with other, more entertaining words.
 ### [yt-zero-out-timestamps.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js)
 Silently zeros any ?t= parameter on watch pages to force playback from the start.
-### [yt-autoexpand-comments.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-autoexpand-comments.user.js)
-Automatically expands truncated comments on YouTube.
 ### [yt-front-to-subs.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js)
 Automatically redirects to the subfeed if you're on the YT front page.
 ### [yt-open-in-freetube.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-in-freetube.user.js)
