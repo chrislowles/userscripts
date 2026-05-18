@@ -24,7 +24,7 @@ Redirects PeerTube videos to a fullscreen embed url that autoplays, minimal QoL 
 Replaces specifically the word "woke" with other, more entertaining words.
 ### [unbuzzwordify.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js)
 Replaces certain buzzwords with other, more entertaining words.
-### [yt-zero-out-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamp.user.js)
+### [yt-zero-out-timestamps.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js)
 Silently zeros any ?t= parameter on watch pages to force playback from the start.
 ### [yt-autoexpand-comments.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-autoexpand-comments.user.js)
 Automatically expands truncated comments on YouTube.
