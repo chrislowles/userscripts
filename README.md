@@ -26,17 +26,13 @@ Redirects PeerTube videos to a fullscreen embed url that autoplays, minimal QoL 
 Replaces specifically the word "woke" with other, more entertaining words.
 ### [unbuzzwordify.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js)
 Replaces certain buzzwords with other, more entertaining words.
-### [yt-front-to-subs.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js)
-Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
-### [yt-open-w-freetube.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-w-freetube.user.js)
-Adds a button to open the currently opened video in FreeTube (if installed)
-### [zero-out-yt-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js)
-Prompts to zero out most youtube.com timestamps on load, might be helpful for certain situations.
 
 ## Ones I've "made"
 These are scripts that I've more or less ship-of-thesis'd (rewritten after initial prototyping) after messing with Claude or Gemini.
 ### [skipper.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/skipper.user.js)
 Marks various sections on YouTube's progress bar using the SponsorBlock API. Press a configurable key to skip the current segment manually.
+### [yt-tweaks.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-tweaks.user.js)
+Various tweaks merged into a mega userscript.
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
 Adds a sidebar widget on your Lemmy instance of choice showing a top 20 of today's Reddit among a configurable set of subreddits.
 ### [fediverse-ooo-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/fediverse-ooo-redirector.user.js)
