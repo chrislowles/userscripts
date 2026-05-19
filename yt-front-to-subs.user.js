@@ -1,19 +1,16 @@
 // ==UserScript==
-// @name            YouTube Tweak: Front Page to Subscriptions
-// @namespace       https://chrislowles.com/
-// @version         2026.5.19
-// @description     Redirects the YouTube front page to your subscriptions feed and rewrites home links.
-// @author          Chris Lowles, Claude
-// @license         AGPL-3.0-or-later
-// @match           http*://www.youtube.com/*
-// @match           http*://m.youtube.com/*
-// @updateURL       https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
-// @downloadURL     https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
-// @run-at          document-start
+// @run-at      document-start
+// @name        YouTube: Front Page > Subfeed
+// @description Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
+// @author      Chris Lowles
+// @version     2026.5.20
+// @updateURL   https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
+// @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
+// @match       http*://www.youtube.com/*
+// @match       http*://m.youtube.com/*
 // ==/UserScript==
 
 let prevURL = '';
-
 new MutationObserver(mutations => {
     if (location.href !== prevURL) {
         prevURL = location.href;
