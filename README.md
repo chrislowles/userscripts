@@ -8,7 +8,8 @@ Userscripts are extensions written to be installed in userscript managers, the b
 The versioning on the userscripts is defined by year.month.day-hotfix, for example 2024.12.25-1 would be a release for the 25th of December, 2024 with the first of any amount of possible additional patches, I don't know if this is a common format but I don't care, this is what works for me and the userscript managers don't seem to mind.
 
 ## Scripts:
-
+### [breezewiki-tweaks.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/breezewiki-tweaks.user.js)
+Detects BreezeWiki instances and applies minimal layout cleanup CSS.
 ### [bsky-to-blueviewer.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/bsky-to-blueviewer.user.js)
 Redirects Bluesky post URLs to blueviewer.pages.dev. Useful for posts linked from ActivityPub-syndicated content via Bridgy.
 ### [canonical-redirector.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js)
