@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Lemmy Tweaks
 // @namespace    https://chrislowles.com/
-// @version      2026.3.27
+// @version      2026.5.20
 // @description  Sorts post comment sections by Top and scrolls to comments on any Lemmy instance. Auto-detects Lemmy via application-name meta tag.
 // @author       Chris Lowles
 // @match        *://*/*
