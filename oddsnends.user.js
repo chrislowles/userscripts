@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to put into their own userscript.
-// @version       2026.3.27
+// @version       2026.5.20
 // @author        Chris Lowles
 // @run-at        document-start
 // @match         *://*/*

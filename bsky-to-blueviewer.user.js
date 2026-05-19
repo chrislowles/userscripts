@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bluesky > Blueviewer
 // @namespace    https://chrislowles.com/
-// @version      2026.3.27
+// @version      2026.5.20
 // @description  Redirects Bluesky post URLs to blueviewer.pages.dev. Useful for posts linked from ActivityPub-syndicated content via Bridgy.
 // @author       Chris Lowles
 // @match        https://bsky.app/*

@@ -3,7 +3,7 @@
 // @license 	MIT
 // @description Automatically redirect referral articles of supported outlets to their original source, based on MSN Redirector by Jamie Landeg-Jones.
 // @author 		Chris Lowles, Jamie Landeg-Jones
-// @version		2026.3.18
+// @version		2026.5.20
 // @updateURL 	https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/canonical-redirector.user.js
 // @run-at 		document-start
