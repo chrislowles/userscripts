@@ -1,36 +1,34 @@
 // ==UserScript==
-// @name            YouTube Tweak: Zero Out Timestamps
-// @namespace       https://chrislowles.com/
-// @version         2026.5.18
-// @description     Silently zeros any ?t= parameter on watch pages to force playback from the start.
-// @author          Chris Lowles, Claude
-// @license         AGPL-3.0-or-later
-// @match           http*://www.youtube.com/*
-// @match           http*://m.youtube.com/*
-// @updateURL       https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js
-// @downloadURL     https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js
-// @run-at          document-start
+// @run-at       document-start
+// @name         Zero Out YT Timestamp
+// @description  Silently zeros out any youtube.com timestamp on load, forcing playback from the start while cleanly removing the parameter.
+// @author       Chris Lowles
+// @version      2026.5.20
+// @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
+// @downloadURL  https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamp.user.js
+// @match        http*://www.youtube.com/*
 // ==/UserScript==
 
-(function () {
-  'use strict';
+// Regarding the logic behind this script, it detects the timestamp and adjusts it to 0 seconds which YT interprets as both playing the video from the start while also removing the parameter, it was something I found as a way to force a reset on YT video playback.
 
-  let prevTimestampURL = '';
+let prevURL = '';
 
-  new MutationObserver(() => {
-    if (location.href === prevTimestampURL) return;
-    prevTimestampURL = location.href;
+new MutationObserver(() => {
+    if (location.href === prevURL) return;
+    prevURL = location.href;
 
-    const tParam = new URL(window.location.href).searchParams.get('t');
+    const tParam = new URL(window.location.href).searchParams.get("t");
+
     if (
-      window.location.pathname === '/watch' &&
-      tParam !== null &&
-      parseInt(tParam.replace('s', '')) > 0
+        window.location.pathname === "/watch" &&
+        tParam !== null &&
+        parseInt(tParam.replace("s", "")) > 0
     ) {
-      const params = new URLSearchParams(window.location.search);
-      params.set('t', 0);
-      window.location.search = `?${params.toString()}`;
+        const params = new URLSearchParams(window.location.search);
+        params.set('t', 0);
+        window.location.search = `?${params.toString()}`;
     }
-  }).observe(document, { subtree: true, childList: true });
-
-})();
+}).observe(document, {
+    subtree: true,
+    childList: true
+});
