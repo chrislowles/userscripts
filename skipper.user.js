@@ -138,7 +138,9 @@
       GM.xmlHttpRequest({
         method: "GET",
         url,
-        headers: { Accept: "application/json" },
+        headers: {
+          Accept: "application/json"
+        },
         onload(resp) {
           try {
             const data = cfg.disable_hashing
@@ -250,9 +252,9 @@
       fontFamily: "'YouTube Sans', 'Roboto', Arial, sans-serif",
       fontSize: "13px",
       fontWeight: "600",
-      color: "#ffffff",
-      background: "rgba(18,18,18,0.92)",
-      boxShadow: "0 2px 10px rgba(0,0,0,0.55)",
+      color: "#FFF",
+      background: "rgba(18, 18, 18, 0.92)",
+      boxShadow: "0 2px 10px rgba(0, 0, 0, 0.55)",
       zIndex: "9999",
       display: "none",
       opacity: "0",
