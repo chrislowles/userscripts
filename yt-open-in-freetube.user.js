@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            YouTube Tweak: Open in FreeTube
 // @namespace       https://chrislowles.com/
-// @version         2026.5.18
+// @version         2026.5.20
 // @description     Fires the freetube:// protocol handler whenever a watch page loads.
 // @author          Chris Lowles, Claude
 // @license         AGPL-3.0-or-later
