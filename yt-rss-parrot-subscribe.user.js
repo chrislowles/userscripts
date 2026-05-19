@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            YouTube Tweak: RSS Parrot Subscribe Button
 // @namespace       https://chrislowles.com/
-// @version         2026.5.18
+// @version         2026.5.20
 // @description     Injects a "Follow via RSS Parrot" button next to the Subscribe button on watch and channel pages.
 // @author          Chris Lowles, Claude
 // @license         AGPL-3.0-or-later
