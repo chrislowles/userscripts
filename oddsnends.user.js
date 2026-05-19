@@ -85,8 +85,8 @@ function handleURLChange() {
 const _pushState = history.pushState.bind(history);
 const _replaceState = history.replaceState.bind(history);
 
-history.pushState = function (...args) { _pushState(...args); handleURLChange(); };
-history.replaceState = function (...args) { _replaceState(...args); handleURLChange(); };
+history.pushState = (...args) => { _pushState(...args); handleURLChange(); };
+history.replaceState = (...args) => { _replaceState(...args); handleURLChange(); };
 
 window.addEventListener('popstate', handleURLChange);
 handleURLChange();
