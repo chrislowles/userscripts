@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Skipper
 // @description  Marks various sections on YouTube's progress bar using the SponsorBlock API. Press a configurable key to skip the current segment manually.
-// @version      2026.5.2
+// @version      2026.5.20
 // @author       Chris Lowles, Claude
 // @license      AGPL-3.0-or-later
 // @namespace    https://greasyfork.org/
