@@ -1,11 +1,11 @@
 // ==UserScript==
 // @run-at       document-start
-// @name         Zero Out YT Timestamps
+// @name         YouTube Tweak: Zero Out YT Timestamps
 // @description  Silently zeros out any youtube.com timestamp on load, forcing playback from the start while cleanly removing the parameter.
 // @author       Chris Lowles
-// @version      2026.5.20-1
-// @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamps.user.js
-// @downloadURL  https://raw.githubusercontent.com/chrislowles/userscripts/main/zero-out-yt-timestamps.user.js
+// @version      2026.5.20-2
+// @updateURL    https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js
+// @downloadURL  https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js
 // @match        http*://www.youtube.com/*
 // ==/UserScript==
 
