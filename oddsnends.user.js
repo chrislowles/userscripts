@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to put into their own userscript.
-// @version       2026.5.21-2
+// @version       2026.5.27
 // @author        Chris Lowles
 // @run-at        document-start
 // @match         *://*/*
@@ -76,9 +76,9 @@ function handleURLChange() {
         case "www.amazon.com":
             window.location.hostname = "www.amazon.com.au";
             break;
-        //case "x.com":
-        //    window.location.hostname = "xcancel.com";
-        //    break;
+        case "x.com":
+            window.location.hostname = "xcancel.com";
+            break;
     }
 }
 
