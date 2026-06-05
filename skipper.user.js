@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Skipper
 // @description  Marks various sections on YouTube's progress bar using the SponsorBlock API. Press a configurable key to skip the current segment manually.
-// @version      2026.5.20
+// @version      2026.6.5
 // @author       Chris Lowles, Claude
 // @license      AGPL-3.0-or-later
 // @namespace    https://greasyfork.org/
@@ -23,13 +23,13 @@
 
 /**
  * Skipper: Using the SponsorBlock API, this script marks segments on the YouTube progress bar and waits for you to decide when to skip.
- * 
+ *
  * HOW IT WORKS:
  * - Coloured markers appear on the progress bar for each detected segment.
  * - When playback enters a marked segment, a banner appears at the bottom-left of the player showing the segment type and your configured skip key.
  * - Press that key to instantly jump to the end of the segment.
  * DEFAULT KEY: s
- * CONFIGURE: Open your userscript manager's menu while on YouTube and choose "Manual Sponsor Skipper — Settings" to change the skip key, active categories, minimum vote threshold, and SponsorBlock instance.
+ * CONFIGURE: Open your userscript manager's menu while on YouTube and choose "Settings" to change the skip key, active categories, minimum vote threshold, and SponsorBlock instance.
  */
 
 (async function () {
@@ -52,27 +52,23 @@
 
   const DEFAULTS = {
     // Which segment types to fetch and mark.
-    // Remove any you don't want from this list.
     categories: ["sponsor", "selfpromo", "intro", "outro", "music_offtopic"],
 
     // Keyboard key that triggers a skip while inside a segment.
-    // Must be a single character (case-insensitive).
     skipKey: "s",
 
     // Minimum SponsorBlock vote count to show a segment.
-    // -2 is the SponsorBlock default (very permissive).
     upvotes: -2,
 
     // SponsorBlock API instance hostname.
     instance: "sponsor.ajay.app",
 
-    // Set true only if crypto.subtle.digest is unavailable in your browser
-    // (e.g. old Pale Moon). Disables privacy-preserving hashed lookups.
+    // Set true only if crypto.subtle.digest is unavailable in your browser.
     disable_hashing: false,
   };
 
-  const SCRIPT_KEY = "skipper_cfg";
-  const PLR_SELECTOR = "#movie_player video, video#player_html5_api, video#player";
+  const SCRIPT_KEY    = "skipper_cfg";
+  const PLR_SELECTOR  = "#movie_player video, video#player_html5_api, video#player";
 
   // ── Load & merge settings ───────────────────────────────────────────────────
 
@@ -82,7 +78,6 @@
     await GM.setValue(SCRIPT_KEY, cfg);
     console.log("[SKIPPER] Default settings saved.");
   } else {
-    // Merge saved settings with defaults so new keys are always present
     cfg = { ...DEFAULTS, ...cfg };
   }
 
@@ -92,12 +87,17 @@
 
   // ── Runtime state ───────────────────────────────────────────────────────────
 
-  let segments      = [];   // Sorted array of segment objects from the API
-  let currentSegIdx = -1;   // Index of segment player is currently inside (-1 = none)
-  let player        = null; // The <video> element
-  let markerContainer = null;
-  let bannerEl      = null;
-  let activeVideoId = "";
+  let segments         = [];
+  let currentSegIdx    = -1;
+  let segStart         = -1;   // cached start of currentSegIdx — fast-path for onTimeUpdate
+  let segEnd           = -1;   // cached end of currentSegIdx
+  let player           = null;
+  let markerContainer  = null;
+  let bannerEl         = null;
+  let activeVideoId    = "";
+  let goGeneration     = 0;    // incremented on each navigation; lets stale go() calls detect and bail
+  let progressObserver = null; // stored so cleanup() can disconnect it and prevent leaks
+  let markerDebounce   = null; // debounce handle for re-injection triggered by progressObserver
 
   // ── Utilities ───────────────────────────────────────────────────────────────
 
@@ -138,9 +138,7 @@
       GM.xmlHttpRequest({
         method: "GET",
         url,
-        headers: {
-          Accept: "application/json"
-        },
+        headers: { Accept: "application/json" },
         onload(resp) {
           try {
             const data = cfg.disable_hashing
@@ -180,8 +178,6 @@
     const duration = player.duration;
     if (!duration || isNaN(duration) || duration <= 0) return;
 
-    // YouTube's progress bar container; this element spans the full width of
-    // the bar and already has a positioning context we can attach to.
     const progressBarContainer = document.querySelector(
       "#movie_player .ytp-progress-bar-container, .html5-video-player .ytp-progress-bar-container"
     );
@@ -190,7 +186,6 @@
       return;
     }
 
-    // Ensure the container is positioned so absolute children work
     if (getComputedStyle(progressBarContainer).position === "static") {
       progressBarContainer.style.position = "relative";
     }
@@ -210,8 +205,7 @@
     for (const seg of segments) {
       const [start, end] = seg.segment;
       const meta = CATEGORY_META[seg.category] || { color: "#FF0000", label: seg.category };
-
-      const pct = (v) => `${(v / duration) * 100}%`;
+      const pct  = (v) => `${(v / duration) * 100}%`;
 
       const marker = document.createElement("div");
       marker.title = `${meta.label}\n${fmtTime(start)} > ${fmtTime(end)}\nPress ${cfg.skipKey.toUpperCase()} to skip`;
@@ -274,7 +268,6 @@
     b.style.borderLeftColor = meta.color;
     b.textContent = `${meta.label}: press ${cfg.skipKey.toUpperCase()} to skip`;
     b.style.display = "block";
-    // Trigger transition after paint
     requestAnimationFrame(() => { b.style.opacity = "1"; });
   }
 
@@ -288,10 +281,13 @@
 
   function onTimeUpdate() {
     if (!segments.length) return;
-
     const t = player.currentTime;
-    let found = -1;
 
+    // Fast path: still within the cached bounds of the current segment — skip the scan.
+    // timeupdate fires ~4× per second so this saves a full array scan the vast majority of the time.
+    if (currentSegIdx >= 0 && t >= segStart && t < segEnd) return;
+
+    let found = -1;
     for (let i = 0; i < segments.length; i++) {
       if (t >= segments[i].segment[0] && t < segments[i].segment[1]) {
         found = i;
@@ -301,15 +297,20 @@
 
     if (found !== currentSegIdx) {
       currentSegIdx = found;
-      if (found >= 0) showBanner(segments[found]);
-      else hideBanner();
+      if (found >= 0) {
+        segStart = segments[found].segment[0];
+        segEnd   = segments[found].segment[1];
+        showBanner(segments[found]);
+      } else {
+        segStart = segEnd = -1;
+        hideBanner();
+      }
     }
   }
 
   // ── Keyboard handler ────────────────────────────────────────────────────────
 
   function onKeyDown(e) {
-    // Don't fire while typing in an input field
     if (
       e.target.tagName === "INPUT" ||
       e.target.tagName === "TEXTAREA" ||
@@ -325,6 +326,7 @@
         );
         player.currentTime = seg.segment[1];
         currentSegIdx = -1;
+        segStart = segEnd = -1; // invalidate fast-path cache after a manual skip
         hideBanner();
       }
     }
@@ -334,52 +336,74 @@
 
   function cleanup() {
     clearMarkers();
-    if (bannerEl)  { bannerEl.remove();  bannerEl  = null; }
-    if (player)    { player.removeEventListener("timeupdate", onTimeUpdate); }
+    clearTimeout(markerDebounce);
+    markerDebounce = null;
+    if (progressObserver) { progressObserver.disconnect(); progressObserver = null; }
+    if (bannerEl) { bannerEl.remove(); bannerEl = null; }
+    if (player)   { player.removeEventListener("timeupdate", onTimeUpdate); }
+    player        = null;
     segments      = [];
     currentSegIdx = -1;
+    segStart = segEnd = -1;
   }
 
   async function go(videoId) {
     if (videoId === activeVideoId) return;
     activeVideoId = videoId;
 
-    console.log(`[SKIPPER] Video changed: ${videoId}`);
+    // Capture generation before any await so stale calls can detect they've been superseded.
+    const myGen = ++goGeneration;
     cleanup();
 
-    // Wait for the <video> element to be present and have readyState >= 1
-    // (HAVE_METADATA — duration is known)
+    console.log(`[SKIPPER] Video changed: ${videoId}`);
+
+    // Wait for <video> with HAVE_METADATA (readyState ≥ 1).
+    // The interval self-cancels if a newer navigation starts, avoiding a dangling poll.
     player = await new Promise(resolve => {
-      const t = setInterval(() => {
+      const tryFind = () => {
         const el = document.querySelector(PLR_SELECTOR);
-        if (el && el.readyState >= 1) { clearInterval(t); resolve(el); }
-      }, 100);
+        return (el && el.readyState >= 1) ? el : null;
+      };
+
+      const immediate = tryFind();
+      if (immediate) { resolve(immediate); return; }
+
+      const t = setInterval(() => {
+        if (myGen !== goGeneration) { clearInterval(t); resolve(null); return; }
+        const el = tryFind();
+        if (el) { clearInterval(t); resolve(el); }
+      }, 200);
     });
+
+    if (!player || myGen !== goGeneration) return;
 
     player.addEventListener("timeupdate", onTimeUpdate);
 
     segments = await fetchSegments(videoId);
+
+    if (myGen !== goGeneration) return;
+
     console.log(`[SKIPPER] ${segments.length} segment(s) loaded for ${videoId}.`);
     if (!segments.length) return;
 
-    // Inject markers; if duration isn't known yet wait for loadedmetadata
     if (player.duration && !isNaN(player.duration) && player.duration > 0) {
       injectMarkers();
     } else {
       player.addEventListener("loadedmetadata", injectMarkers, { once: true });
     }
 
-    // Also re-inject if YouTube re-renders the progress bar (e.g. chapter update)
-    // by watching for the progress bar container being replaced.
+    // Re-inject if YouTube re-renders the progress bar (e.g. chapter updates).
+    // Debounced to avoid rapid repeated calls during UI churn; ref stored for cleanup().
     const progressBarArea = document.querySelector(
       "#movie_player .ytp-chrome-bottom, .html5-video-player .ytp-chrome-bottom"
     );
     if (progressBarArea) {
-      new MutationObserver(() => {
-        if (!document.getElementById("skipper-markers")) {
-          injectMarkers();
-        }
-      }).observe(progressBarArea, { childList: true, subtree: true });
+      progressObserver = new MutationObserver(() => {
+        if (document.getElementById("skipper-markers")) return;
+        clearTimeout(markerDebounce);
+        markerDebounce = setTimeout(injectMarkers, 150);
+      });
+      progressObserver.observe(progressBarArea, { childList: true, subtree: true });
     }
   }
 
@@ -389,28 +413,40 @@
     const params = new URLSearchParams(location.search);
     if (params.has("v")) {
       go(params.get("v"));
-    } else if (/^\/(embed|v)\//.test(location.pathname)) {
+      return;
+    }
+    if (/^\/(embed|v)\//.test(location.pathname)) {
       const parts = location.pathname.split("/").filter(Boolean);
-      if (parts[1]) go(parts[1]);
+      if (parts[1]) { go(parts[1]); return; }
+    }
+    // Not a video page — remove any residual markers/banner left from the previous video.
+    if (activeVideoId) {
+      activeVideoId = "";
+      cleanup();
     }
   }
 
   // ── Initialise ──────────────────────────────────────────────────────────────
 
   document.addEventListener("keydown", onKeyDown, true);
-  checkForVideo();
 
-  window.addEventListener("load", () => {
-    // Observe DOM mutations to catch YouTube SPA page transitions
-    new MutationObserver(checkForVideo)
-      .observe(document.body, { childList: true, subtree: true });
+  // YouTube's own SPA events replace a broad MutationObserver on document.body,
+  // which would have fired on every DOM mutation across the entire page.
+  document.addEventListener("yt-navigate-start", () => {
+    ++goGeneration;   // invalidate any in-flight go() calls
+    activeVideoId = "";
+    cleanup();        // remove stale markers/banner before the new page renders
   });
+  document.addEventListener("yt-navigate-finish", checkForVideo);
+
+  // Initial check: handles the very first page load and non-SPA embed/v/ paths
+  // where yt-navigate-finish may have fired before our listener was registered.
+  checkForVideo();
 
   // ── Userscript manager menu ─────────────────────────────────────────────────
 
   if (typeof GM.registerMenuCommand !== "undefined") {
     GM.registerMenuCommand("Settings", () => {
-      // Skip key
       const newKey = window.prompt(
         "Skip key (single character):\nCurrent: " + cfg.skipKey.toUpperCase(),
         cfg.skipKey
@@ -423,7 +459,6 @@
         }
       }
 
-      // Minimum upvotes
       const newUpvotes = window.prompt(
         "Minimum SponsorBlock vote threshold (default -2):\nCurrent: " + cfg.upvotes,
         String(cfg.upvotes)
@@ -433,7 +468,6 @@
         if (!isNaN(parsed)) cfg.upvotes = parsed;
       }
 
-      // Instance
       const newInst = window.prompt(
         "SponsorBlock API instance hostname:\nCurrent: " + cfg.instance,
         cfg.instance
@@ -442,7 +476,6 @@
         cfg.instance = newInst.trim().replace(/^https?:\/\//, "");
       }
 
-      // Categories (comma-separated)
       const catList = Object.keys(CATEGORY_META).join(", ");
       const newCats = window.prompt(
         `Active categories (comma-separated).\nAvailable: ${catList}\nCurrent: ${cfg.categories.join(", ")}`,
