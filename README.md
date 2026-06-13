@@ -18,8 +18,6 @@ Automatically redirect referral articles of supported outlets to their original 
 Redirects posts on instances of fediverse software to your local server through fediverse.ooo
 ### [gemini-link-fixer.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/gemini-link-fixer.user.js)
 Monitors Gemini for links that point to Google Search queries of URLs and converts them into direct links.
-### [lemmy-tweaks.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/lemmy-tweaks.user.js)
-Various tweaks for standard Lemmy installs.
 ### [letterboxd-review-autoexpander.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/letterboxd-review-autoexpander.user.js)
 Automatically expands all truncated reviews on Letterboxd film and reviews pages.
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
