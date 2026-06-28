@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.5.20
+// @version       2026.6.28
 // @description   Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*
@@ -168,10 +168,12 @@
       width: 100%;
       box-sizing: border-box;
       background: var(--bs-card-bg, #1E1E2E);
-      border-bottom: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
+      border: 1px solid var(--bs-border-color, rgba(255, 255, 255, 0.1));
       font-size: 0.82rem;
       font-family: inherit;
       z-index: 900;
+      border-left: none;
+      border-right: none;
     }
     #${WIDGET_ID} .rsw-inner {
       display: flex;
