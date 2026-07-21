@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
 // @description   Random bits of script that are too inconsequential to put into their own userscript. Now includes Breezewiki tweaks, Bluesky to Blueviewer, Gemini link fixer, Letterboxd review expander, Phanpy auto-local, SimpCity tweaks, YT autoexpand comments.
-// @version       2026.7.18
+// @version       2026.7.21
 // @author        Chris Lowles
 // @run-at        document-start
 // @match         *://*/*
@@ -78,9 +78,9 @@ function handleURLChange() {
         case "www.amazon.com":
             window.location.hostname = "www.amazon.com.au";
             break;
-        //case "x.com":
-        //    window.location.hostname = "xcancel.com";
-        //    break;
+        case "x.com":
+            window.location.hostname = "xcancel.com";
+            break;
     }
 
     // Breezewiki Tweaks
