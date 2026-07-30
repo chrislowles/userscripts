@@ -14,6 +14,8 @@ Automatically redirect referral articles of supported outlets to their original 
 Redirects posts on instances of fediverse software to your local server through fediverse.ooo
 ### [meanwhile-on-reddit.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/meanwhile-on-reddit.user.js)
 Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
+### [ig-spam-hammer.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/ig-spam-hammer.user.js)
+Adds a shortcut button to each post that automatically walks through Instagram's report flow and reports the post as spam.
 ### [reddit-account-age.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/reddit-account-age.user.js)
 Displays the account age of a user next to their username in Reddit comments.
 ### [skipper.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/skipper.user.js)
