@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name            YouTube Tweak: Auto-Expand Comments
 // @namespace       https://chrislowles.com/
-// @version         2026.5.20
-// @description     Automatically clicks truncated "Read more" or "Show more" buttons in comment threads.
+// @version         2026.8.7
+// @description     Automatically clicks truncated "Read more" or "Show more" buttons on YouTube.
 // @author          Chris Lowles, Claude
 // @license         AGPL-3.0-or-later
 // @match           http*://www.youtube.com/*

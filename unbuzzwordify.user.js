@@ -3,7 +3,7 @@
 // @name            Unbuzzwordify
 // @description     Replaces buzzwords with other, more entertaining words.
 // @author          Chris Lowles
-// @version         2026.6.2
+// @version         2026.8.7
 // @updateURL       https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js
 // @downloadURL     https://raw.githubusercontent.com/chrislowles/userscripts/main/unbuzzwordify.user.js
 // -- sites that break with this

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Meanwhile on Reddit
 // @namespace     https://chrislowles.com/
-// @version       2026.6.28
+// @version       2026.8.7
 // @description   Injects a header bar on your Lemmy instance showing today's top 3 Reddit posts from a configurable set of subreddits. Also redirects Reddit URLs to your configured Redlib instance.
 // @author        Chris Lowles, Claude
 // @match         *://*/*

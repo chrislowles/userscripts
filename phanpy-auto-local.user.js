@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Phanpy Auto-Switch to My Instance
-// @version      2026.5.20
+// @version      2026.8.7
 // @description  Automatically clicks "Switch to my instance" button in Phanpy.
 // @author       Chris Lowles, Claude
 // @match        https://phanpy.social/*

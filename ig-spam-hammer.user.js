@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Instagram Spam Hammer
 // @namespace    https://chrislowles.com/
-// @version      2026.7.30
+// @version      2026.8.7
 // @description  Adds a shortcut button to each post that automatically walks through Instagram's report flow and reports the post as spam.
 // @author       Chris Lowles, Claude
 // @match        https://www.instagram.com/*
