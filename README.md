@@ -40,7 +40,7 @@ Automatically clicks truncated "Read more" or "Show more" buttons on YouTube.
 Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
 ### [yt-open-in-freetube.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-open-in-freetube.user.js)
 Fires the freetube:// protocol handler whenever a watch page loads.
-### [yt-zero-out-timestamp.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamp.user.js)
+### [yt-zero-out-timestamps.user.js](https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-zero-out-timestamps.user.js)
 Silently zeros out any youtube.com timestamp on load, forcing playback from the start while cleanly removing the parameter.
 
 ---
