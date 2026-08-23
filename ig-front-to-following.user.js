@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Instagram: Front Page > Following Feed
 // @namespace    https://chrislowles.com/
-// @version      2026.8.15
+// @version      2026.8.22
 // @description  Redirects the Instagram front page to the Following feed variant when logged in, with a floating button to jump back to the For You feed.
 // @author       Chris Lowles, Claude
 // @match        https://www.instagram.com/*
