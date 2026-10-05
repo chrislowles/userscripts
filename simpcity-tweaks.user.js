@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SimpCity Tweaks
 // @namespace    https://chrislowles.com/
-// @version      2026.8.7
+// @version      2026.10.5
 // @description  Auto-accepts the mark-read screen and checks title-only on search.
 // @author       Chris Lowles
 // @match        https://simpcity.cr/*

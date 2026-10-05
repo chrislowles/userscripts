@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BreezeWiki Tweaks
 // @namespace    https://chrislowles.com/
-// @version      2026.8.7
+// @version      2026.10.5
 // @description  Detects BreezeWiki instances and applies minimal layout cleanup CSS.
 // @author       Chris Lowles
 // @match        *://*/*

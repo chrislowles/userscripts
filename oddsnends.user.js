@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name          Oddsnends (Personal Use)
+// @namespace     https://chrislowles.com/
 // @description   Random bits of script that are too inconsequential to put into their own userscript.
 // @version       2026.10.5
 // @author        Chris Lowles

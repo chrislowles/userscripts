@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fediverse > Local (fediverse.ooo) Redirector
-// @namespace    chrislowles.com
-// @version      2026.8.7
+// @namespace    https://chrislowles.com/
+// @version      2026.10.5
 // @description  Redirects posts on instances of fediverse software to your local server through fediverse.ooo.
 // @author       Chris Lowles, Claude
 // @match        *://*/*

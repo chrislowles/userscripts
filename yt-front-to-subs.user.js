@@ -1,9 +1,10 @@
 // ==UserScript==
 // @run-at      document-start
 // @name        YouTube: Front Page > Subfeed
+// @namespace   https://chrislowles.com/
 // @description Redirects the YouTube Front Page to the Subfeed, by adjusting links in elements that direct there as well as simple checking for the path upon load.
 // @author      Chris Lowles
-// @version     2026.8.22
+// @version     2026.10.5
 // @updateURL   https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
 // @downloadURL https://raw.githubusercontent.com/chrislowles/userscripts/main/yt-front-to-subs.user.js
 // @match       http*://www.youtube.com/*

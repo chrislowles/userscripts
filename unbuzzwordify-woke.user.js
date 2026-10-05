@@ -1,6 +1,7 @@
 // ==UserScript==
 // @run-at          document-start
 // @name            Unbuzzwordify (Just Woke)
+// @namespace       https://chrislowles.com/
 // @description     Replaces specifically the word woke with other, more entertaining words.
 // @author          Chris Lowles
 // @version         2026.8.7
