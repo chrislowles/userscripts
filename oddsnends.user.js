@@ -2,7 +2,7 @@
 // @name          Oddsnends (Personal Use)
 // @namespace     https://chrislowles.com/
 // @description   Random bits of script that are too inconsequential to put into their own userscript.
-// @version       2026.10.5
+// @version       2026.10.6
 // @author        Chris Lowles
 // @run-at        document-start
 // @match         *://*/*
@@ -76,16 +76,16 @@ function handleURLChange() {
         case "www.amazon.com":
             window.location.hostname = "www.amazon.com.au";
             break;
-        case "www.ebay.com.au":
-        case "www.ebay.com":
-        case "www.ebay.co.uk":
-            if (window.location.pathname.startsWith("/sch/")) {
-                const query = new URL(window.location.href).searchParams.get("_nkw");
-                if (query) {
-                    window.location.href = `https://picclick.com.au/?q=${encodeURIComponent(query)}`;
-                }
-            }
-            break;
+        //case "www.ebay.com.au":
+        //case "www.ebay.com":
+        //case "www.ebay.co.uk":
+        //    if (window.location.pathname.startsWith("/sch/")) {
+        //        const query = new URL(window.location.href).searchParams.get("_nkw");
+        //        if (query) {
+        //            window.location.href = `https://picclick.com.au/?q=${encodeURIComponent(query)}`;
+        //        }
+        //    }
+        //    break;
         //case "x.com":
         //    window.location.hostname = "xcancel.com";
         //    break;
